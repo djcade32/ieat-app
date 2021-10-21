@@ -1,0 +1,14 @@
+:root {
+  /* Colors */
+
+  --font-color: hsl(224, 62%, 8%);
+  --button-bg-color: hsl(221, 61%, 64%);
+  --input-bg-color: hsl(240, 3%, 93%);
+  --input-placeholder-color: hsl(0, 0%, 73%);
+  --rating-start-color: hsl(61, 86%, 61%);
+
+  /* Typography */
+
+  --font-size: 1rem;
+  --font-family: "Poppins";
+}
