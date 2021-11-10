@@ -14,21 +14,22 @@ function App() {
       </nav>
       <div className="header">
         <img className="profile-pic" src={profilePic} alt="profile" />
-        <h2 className="username">Mike Williams</h2>
-        <div className="user-stats">
-          <div className="stat">
-            <p>34</p>
-            <p>visited</p>
-          </div>
-          <div className="stat">
-            <p>10</p>
-            <p>not visited</p>
-          </div>
+        <div className="user-info">
+          <h2 className="username">Mike Abel</h2>
+          <p className="user-location">
+            <em>Washington, D.C.</em>
+          </p>
         </div>
       </div>
-      <div className="buttons-container">
-        <button className="visited-button toggle-button">Visited</button>
-        <button className="to-visit-button toggle-button">To Visit</button>
+      <div className="user-stats">
+        <button className="stat-button">
+          <p className="stat-number">34</p>
+          <p className="stat-title">visited</p>
+        </button>
+        <button className="stat-button">
+          <p className="stat-number">10</p>
+          <p className="stat-title">not visited</p>
+        </button>
       </div>
 
       <div className="visited-places-container">
