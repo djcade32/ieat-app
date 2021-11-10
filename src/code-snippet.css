@@ -1,0 +1,29 @@
+.input-wrapper {
+  margin-top: 1rem;
+}
+
+.search-input {
+  width: 100%;
+  padding-left: 2rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  background-color: var(--input-bg-color);
+  border: none;
+  border-radius: 0.5em;
+  caret-color: var(--button-bg-color);
+}
+
+.search-input::placeholder {
+  color: var(--input-placeholder-color);
+}
+
+.search-input:focus {
+  outline-color: var(--button-bg-color);
+}
+
+.search-icon {
+  position: absolute;
+  margin-left: 0.5rem;
+  margin-top: 0.5rem;
+  color: var(--input-placeholder-color);
+}

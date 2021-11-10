@@ -1,14 +1,16 @@
 :root {
   /* Colors */
 
-  --font-color: hsl(224, 62%, 8%);
-  --button-bg-color: hsl(221, 61%, 64%);
-  --input-bg-color: hsl(240, 3%, 93%);
-  --input-placeholder-color: hsl(0, 0%, 73%);
-  --rating-start-color: hsl(61, 86%, 61%);
+  --bg-color: hsl(0, 14%, 97%);
+  --card-bg-color: hsl(219, 38%, 90%);
+  --hover-effect-color: hsl(213, 47%, 47%);
+  --font-color: hsl(212, 64%, 19%);
+  --rating-start-color: hsl(54, 86%, 61%);
 
   /* Typography */
 
   --font-size: 1rem;
   --font-family: "Poppins";
+  --font-family-name-1: "Playfair Display";
+  --font-family-name-2: "Merriweather";
 }
