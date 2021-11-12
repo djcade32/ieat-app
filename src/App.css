@@ -99,10 +99,18 @@
   justify-self: start;
   text-align: center;
   letter-spacing: 0.05rem;
+  color: var(--font-color);
 }
 
 .stat-button:hover {
   color: var(--hover-effect-color);
+}
+
+.header-hr {
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  color: var(--font-subtitle-color);
 }
 
 .stat-button:hover {
@@ -112,24 +120,82 @@
 .visited-places-container {
   overflow-x: hidden;
   overflow-y: auto;
-  height: 50vh;
   padding: 1rem;
-  /* background-color: var(--input-bg-color); */
+  height: 50vh;
+  margin-right: auto;
+  margin-left: auto;
+  /* background-color: var(--ca);  */
 }
 
 .place-container {
+  display: grid;
+  grid-template-columns: 0.6fr 1.4fr;
+  gap: 0.5rem;
   background-color: var(--card-bg-color);
-  color: var(--font-color);
-  display: flex;
-  justify-content: space-around;
-  padding-top: 1rem;
-  padding-bottom: 1rem;
-  font-size: 0.75rem;
+  overflow: hidden;
   border-radius: 0.5rem;
+  height: 8rem;
+  color: var(--font-color);
+  font-size: 0.9rem;
+  object-fit: contain;
+  margin-bottom: 2rem;
+  margin-right: 0.5rem;
+  margin-left: 0.5rem;
+  cursor: pointer;
+  box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.36);
 }
 
-.place-container:not(.place-container:last-of-type) {
-  margin-bottom: 1rem;
+.place-container:last-of-type {
+  margin-bottom: 0;
+}
+
+.place-container:hover {
+  background-color: var(--card-bg-hover-color);
+}
+
+.place-image {
+  width: 6rem;
+  height: 8rem;
+  object-fit: cover;
+}
+
+.place-name {
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+  align-self: end;
+}
+
+/* clip-path: inset(10% 17% 14% 16%); */
+
+.place-location-wrapper {
+  display: flex;
+  gap: 0.2rem;
+}
+
+.location-marker {
+  color: var(--font-subtitle-color);
+}
+
+.place-info-wrapper {
+  padding-top: 0.5rem;
+  padding-right: 0.5rem;
+  padding-bottom: 0.5rem;
+  display: grid;
+  justify-content: space-between;
+}
+
+.place-category {
+  color: var(--font-subtitle-color);
+}
+
+.place-price {
+  color: var(--font-subtitle-color);
+}
+
+.stat-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-self: end;
 }
 
 .place-rating {

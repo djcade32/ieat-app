@@ -3,6 +3,7 @@
 
   --bg-color: hsl(0, 14%, 97%);
   --card-bg-color: hsl(219, 38%, 90%);
+  --card-bg-hover-color: hsla(212, 65%, 19%, 0.171);
   --hover-effect-color: hsl(213, 47%, 47%);
   --font-color: hsl(212, 64%, 19%);
   --font-subtitle-color: hsl(216, 7%, 55%);
