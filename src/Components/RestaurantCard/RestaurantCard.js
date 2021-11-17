@@ -1,0 +1,29 @@
+import React from "react";
+import "./RestaurantCard.css";
+
+function RestaurantCard(props) {
+  return (
+    <div className="place-container">
+      <img className="place-image" src={props.img} alt={props.title} />
+      <div className="place-info-wrapper">
+        <h2 className="place-name">{props.title}</h2>
+        <div className="place-location-wrapper">
+          <i className="fas fa-map-marker-alt location-marker"></i>
+          <p className="place-location">
+            <em>{props.location}</em>
+          </p>
+        </div>
+        <div className="stat-wrapper">
+          <p className="place-category">{props.category}</p>
+          <p className="place-price">{props.price}</p>
+          <div className="place-rating">
+            <p className="rating-number">{props.rating}</p>
+            <i className="far fa-star star"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default RestaurantCard;

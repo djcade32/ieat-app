@@ -1,0 +1,81 @@
+.header {
+  display: grid;
+  grid-template-columns: 0.6fr 1.4fr;
+  grid-template-rows: 1fr;
+  gap: 1rem;
+  grid-template-areas: ".user-info";
+  /* padding: 0rem 1rem 0rem; */
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.user-info {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 0px 0px;
+  grid-template-areas:
+    "."
+    ".";
+  grid-area: user-info;
+}
+
+.profile-pic {
+  width: 5rem;
+  border-radius: 50%;
+  box-shadow: 0px 13px 18px -5px rgb(63, 114, 175);
+}
+
+.username {
+  font-family: var(--font-family-name-2);
+  font-weight: 700;
+  font-size: 1.5rem;
+  justify-self: start;
+  align-self: end;
+  margin-bottom: 0.25rem;
+}
+
+.user-location {
+  font-size: 0.75rem;
+  color: var(--font-subtitle-color);
+}
+
+.user-stats {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 1.5rem;
+}
+
+.stat-number {
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.stat-title {
+  font-size: 1rem;
+}
+
+.stat-button {
+  background-color: transparent;
+  border: none;
+  justify-self: start;
+  text-align: center;
+  letter-spacing: 0.05rem;
+  color: var(--font-color);
+}
+
+.stat-button:hover {
+  color: var(--hover-effect-color);
+}
+
+.header-hr {
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  color: var(--font-subtitle-color);
+}
+
+.stat-button:hover {
+  cursor: pointer;
+}
