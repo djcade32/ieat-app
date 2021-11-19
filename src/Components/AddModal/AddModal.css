@@ -1,0 +1,99 @@
+.add-modal-container {
+  background-color: var(--card-bg-color);
+  position: absolute;
+  width: 95%;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  margin-top: 6rem;
+  margin-left: auto;
+  margin-right: auto;
+  border-top-left-radius: 2rem;
+  border-top-right-radius: 2rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.modal-title {
+  font-family: var(--font-family-name-2);
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+}
+
+.input {
+  width: 65%;
+  padding-left: 2rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
+  border: none;
+  border-radius: 0.5em;
+  caret-color: var(--font-color);
+  font-family: var(--font-family);
+}
+
+.input::placeholder {
+  color: var(--font-subtitle-color);
+}
+
+.input:focus {
+  outline-color: var(--hover-effect-color);
+}
+
+.modal-textarea {
+  resize: none;
+  width: 65%;
+  padding-left: 1rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
+  margin-left: auto;
+  margin-right: auto;
+  border: none;
+  border-radius: 0.5em;
+  caret-color: var(--font-color);
+  font-family: var(--font-family);
+}
+
+.modal-textarea::placeholder {
+  color: var(--font-subtitle-color);
+}
+
+.modal-textarea:focus {
+  outline-color: var(--hover-effect-color);
+}
+
+.icon {
+  position: absolute;
+  margin-left: 0.5rem;
+  margin-top: 0.5rem;
+  color: var(--font-subtitle-color);
+}
+
+.modal-upload-button {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  border: none;
+  outline: var(--font-color) solid 2px;
+  padding: 1rem;
+  width: 65%;
+  border-radius: 0.25rem;
+  background-color: transparent;
+}
+
+.modal-upload-button:hover {
+  background-color: var(--hover-effect-color);
+}
+
+.action-button {
+  border: none;
+  outline: var(--font-color) solid 2px;
+  padding: 1rem;
+  border-radius: 0.25rem;
+  background-color: transparent;
+}

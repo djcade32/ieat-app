@@ -1,6 +1,10 @@
+.restaurant-page-container {
+  position: relative;
+}
+
 .add-control-container {
   margin-top: 2rem;
-  margin-bottom: 2rem;
+  padding-bottom: 2rem;
   text-align: center;
 }
 
