@@ -6,7 +6,6 @@
   right: 0;
   left: 0;
   bottom: 0;
-  margin-top: 6rem;
   margin-left: auto;
   margin-right: auto;
   border-top-left-radius: 2rem;
@@ -21,7 +20,7 @@
   font-family: var(--font-family-name-2);
   font-size: 1.5rem;
   margin-bottom: 1rem;
-  margin-top: 1rem;
+  margin-top: 2rem;
 }
 
 .input {
@@ -88,6 +87,16 @@
 
 .modal-upload-button:hover {
   background-color: var(--hover-effect-color);
+  color: white;
+  cursor: pointer;
+}
+
+.modal-upload-button:hover .upload-icon {
+  color: white;
+}
+
+.upload-icon {
+  margin-right: 0.5rem;
 }
 
 .action-button {
@@ -96,4 +105,60 @@
   padding: 1rem;
   border-radius: 0.25rem;
   background-color: transparent;
+  width: 6rem;
+}
+
+.action-button:hover {
+  background-color: var(--hover-effect-color);
+  color: white;
+  cursor: pointer;
+}
+
+.buttons-container {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+/* Star Rating Css */
+
+.rate {
+  height: 2rem;
+  display: flex;
+  justify-content: center;
+  gap: 0.25rem;
+  flex-direction: row-reverse;
+  margin-bottom: 1rem;
+  cursor: pointer;
+}
+.rate:not(:checked) > input {
+  position: absolute;
+  top: -9999px;
+}
+.rate:not(:checked) > label {
+  float: right;
+  width: 1em;
+  overflow: hidden;
+  white-space: nowrap;
+  cursor: pointer;
+  font-size: 30px;
+  color: #ccc;
+}
+.rate:not(:checked) > label:before {
+  content: "★ ";
+}
+.rate > input:checked ~ label {
+  color: #ffc700;
+}
+.rate:not(:checked) > label:hover,
+.rate:not(:checked) > label:hover ~ label {
+  color: #deb217;
+}
+.rate > input:checked + label:hover,
+.rate > input:checked + label:hover ~ label,
+.rate > input:checked ~ label:hover,
+.rate > input:checked ~ label:hover ~ label,
+.rate > label:hover ~ input:checked ~ label {
+  color: #c59b08;
 }

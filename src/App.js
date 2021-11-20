@@ -10,8 +10,8 @@ import RestaurantPage from "./Pages/RestaurantPage/RestaurantPage";
 
 const PLACES_LIST = [
   {
-    id: "place1",
-    img: placeImg1,
+    id: "placeImg3",
+    img: placeImg3,
     title: "Tatte Bakery & Cafe",
     location: "1200 New Hampshire Ave NW, Washington, DC",
     category: "Cafe",
@@ -28,8 +28,8 @@ const PLACES_LIST = [
     rating: 3.5,
   },
   {
-    id: "placeImg3",
-    img: placeImg3,
+    id: "placeImg1",
+    img: placeImg1,
     title: "Misha's",
     location: "917 King St, Alexandria, VA",
     category: "Cafe",
