@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import ProfileHeader from "../../Components/ProfileHeader/ProfileHeader";
 import PlacesContainer from "../../Components/PlacesContainer/PlacesContainer";
 import RestaurantCard from "../../Components/RestaurantCard/RestaurantCard";
@@ -9,6 +9,7 @@ import profilePic from "../../images/profile-pic-1.jpg";
 import "./RestaurantPage.css";
 
 function RestaurantPage(props) {
+  const uploadRef = useRef(null);
   const [showModal, setShowModal] = useState(false);
 
   function handleAddButtonClick() {
@@ -17,6 +18,10 @@ function RestaurantPage(props) {
 
   function handleActionButtonClick() {
     setShowModal(false);
+  }
+
+  function handleImageUpload(event) {
+    myRefname.current.click();
   }
   return (
     <div className="restaurant-page-container">
@@ -72,30 +77,35 @@ function RestaurantPage(props) {
               rows="10"
               placeholder="Description..."
             ></textarea>
-            <div class="rate">
+            <div className="rate">
               <input type="radio" id="star5" name="rate" value="5" />
-              <label for="star5" title="text">
+              <label htmlFor="star5" title="text">
                 5 stars
               </label>
               <input type="radio" id="star4" name="rate" value="4" />
-              <label for="star4" title="text">
+              <label htmlFor="star4" title="text">
                 4 stars
               </label>
               <input type="radio" id="star3" name="rate" value="3" />
-              <label for="star3" title="text">
+              <label htmlFor="star3" title="text">
                 3 stars
               </label>
               <input type="radio" id="star2" name="rate" value="2" />
-              <label for="star2" title="text">
+              <label htmlFor="star2" title="text">
                 2 stars
               </label>
               <input type="radio" id="star1" name="rate" value="1" />
-              <label for="star1" title="text">
+              <label htmlFor="star1" title="text">
                 1 star
               </label>
             </div>
-            <button className="modal-upload-button">
+            <button className="modal-upload-button" onClick={handleImageUpload}>
               <i className="fas fa-upload upload-icon"></i> Choose Image
+              <input
+                className="hidden-file-upload-button"
+                type="file"
+                ref={uploadRef}
+              />
             </button>
           </div>
           <div className="buttons-container">
