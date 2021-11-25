@@ -1,11 +1,18 @@
 import "./App.css";
 
 import Navbar from "./Components/Navbar/Navbar";
+import {
+  BrowserRouter as Router,
+  Route,
+  Navigate,
+  Routes,
+} from "react-router-dom";
 
 import placeImg1 from "./images/place-img-1.jpg";
 import placeImg2 from "./images/place-img-2.jpg";
 import placeImg3 from "./images/place-img-3.jpg";
 
+import UserPage from "./Pages/UserPage/UserPage";
 import RestaurantPage from "./Pages/RestaurantPage/RestaurantPage";
 
 const PLACES_LIST = [
@@ -40,10 +47,15 @@ const PLACES_LIST = [
 
 function App() {
   return (
-    <div className="App">
-      <Navbar />
-      <RestaurantPage userPlaces={PLACES_LIST} />
-    </div>
+    <Router>
+      <div className="App">
+        <Navbar />
+        <Routes>
+          <Route path="/*" element={<UserPage userPlaces={PLACES_LIST} />} />
+          <Route path="/:userId/restaurant" element={<RestaurantPage />} />
+        </Routes>
+      </div>
+    </Router>
   );
 }
 

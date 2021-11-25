@@ -1,9 +1,10 @@
 import React from "react";
 import "./RestaurantCard.css";
+import { Link } from "react-router-dom";
 
 function RestaurantCard(props) {
   return (
-    <div className="place-container">
+    <li className="place-container">
       <img className="place-image" src={props.img} alt={props.title} />
       <div className="place-info-wrapper">
         <h2 className="place-name">{props.title}</h2>
@@ -22,7 +23,7 @@ function RestaurantCard(props) {
           </div>
         </div>
       </div>
-    </div>
+    </li>
   );
 }
 
