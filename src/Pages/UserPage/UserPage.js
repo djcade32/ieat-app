@@ -32,6 +32,7 @@ function UserPage(props) {
           return (
             <RestaurantCard
               key={place.id}
+              id={place.id}
               title={place.title}
               img={place.img}
               location={place.location}

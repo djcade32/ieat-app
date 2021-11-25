@@ -24,6 +24,8 @@ const PLACES_LIST = [
     category: "Cafe",
     price: "$$",
     rating: 4.5,
+    description:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis maiores sint dolores possimus libero cupiditate.",
   },
   {
     id: "placeImg2",
@@ -33,6 +35,8 @@ const PLACES_LIST = [
     category: "Diner",
     price: "$",
     rating: 3.5,
+    description:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis maiores sint dolores possimus libero cupiditate.",
   },
   {
     id: "placeImg1",
@@ -42,6 +46,8 @@ const PLACES_LIST = [
     category: "Cafe",
     price: "$$",
     rating: 4,
+    description:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis maiores sint dolores possimus libero cupiditate.",
   },
 ];
 
@@ -52,7 +58,7 @@ function App() {
         <Navbar />
         <Routes>
           <Route path="/*" element={<UserPage userPlaces={PLACES_LIST} />} />
-          <Route path="/:userId/restaurant" element={<RestaurantPage />} />
+          <Route path="/:placeId/restaurant*" element={<RestaurantPage />} />
         </Routes>
       </div>
     </Router>
