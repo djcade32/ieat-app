@@ -66,6 +66,7 @@
 
 .stat-button:hover {
   color: var(--hover-effect-color);
+  cursor: pointer;
 }
 
 .header-hr {
@@ -73,8 +74,4 @@
   margin-left: auto;
   margin-right: auto;
   color: var(--font-subtitle-color);
-}
-
-.stat-button:hover {
-  cursor: pointer;
 }
