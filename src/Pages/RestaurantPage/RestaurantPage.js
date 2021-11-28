@@ -47,6 +47,26 @@ const PLACES_LIST = [
         rating: 4,
       },
     ],
+    drinks: [
+      {
+        id: "placeImg3Drink1",
+        img: placeImg3Drink1,
+        title: "Iced Caramel Latte",
+        description:
+          "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptas, earum.",
+        price: "$5.00",
+        rating: 3,
+      },
+      {
+        id: "placeImg3Drink2",
+        img: placeImg3Drink2,
+        title: "Hot Chocolate",
+        description:
+          "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptas, earum.",
+        price: "$3.99",
+        rating: 4,
+      },
+    ],
   },
   {
     id: "placeImg2",
@@ -74,8 +94,12 @@ const PLACES_LIST = [
 
 function RestaurantPage(props) {
   const [showModal, setShowModal] = useState(false);
+  const [showMealList, setShowMealList] = useState(true);
+
   const uploadRef = useRef(null);
+
   const placeId = useParams().placeId;
+
   const identifiedPlace = PLACES_LIST.find((p) => p.id === placeId);
   if (!identifiedPlace) {
     return (
@@ -95,6 +119,14 @@ function RestaurantPage(props) {
 
   function handleImageUpload() {
     uploadRef.current.click();
+  }
+
+  function handleFoodTypeClick(event) {
+    if (event.target.id === "meals") {
+      setShowMealList(true);
+    } else {
+      setShowMealList(false);
+    }
   }
 
   return (
@@ -122,24 +154,58 @@ function RestaurantPage(props) {
         <p className="restaurant-description">{identifiedPlace.description}</p>
       </div>
       <div className="restaurant-page-buttons">
-        <button className="restaurant-page-button">Meals</button>
-        <button className="restaurant-page-button">Drinks</button>
+        <button
+          id="meals"
+          onClick={handleFoodTypeClick}
+          className={
+            showMealList
+              ? "restaurant-page-button active-page-button"
+              : "restaurant-page-button"
+          }
+        >
+          Meals
+        </button>
+        <button
+          id="drinks"
+          onClick={handleFoodTypeClick}
+          className={
+            showMealList
+              ? "restaurant-page-button"
+              : "restaurant-page-button active-page-button"
+          }
+        >
+          Drinks
+        </button>
       </div>
       <hr className="restaurant-page-hr" />
       <PlacesContainer>
-        {identifiedPlace.meals.map((meal) => {
-          return (
-            <ItemCard
-              key={meal.id}
-              id={meal.id}
-              title={meal.title}
-              img={meal.img}
-              description={meal.description}
-              price={meal.price}
-              rating={meal.rating}
-            />
-          );
-        })}
+        {showMealList
+          ? identifiedPlace.meals.map((meal) => {
+              return (
+                <ItemCard
+                  key={meal.id}
+                  id={meal.id}
+                  title={meal.title}
+                  img={meal.img}
+                  description={meal.description}
+                  price={meal.price}
+                  rating={meal.rating}
+                />
+              );
+            })
+          : identifiedPlace.drinks.map((drink) => {
+              return (
+                <ItemCard
+                  key={drink.id}
+                  id={drink.id}
+                  title={drink.title}
+                  img={drink.img}
+                  description={drink.description}
+                  price={drink.price}
+                  rating={drink.rating}
+                />
+              );
+            })}
       </PlacesContainer>
       <div className="add-control-container">
         <i
@@ -170,34 +236,6 @@ function RestaurantPage(props) {
             rows="10"
             placeholder="Description..."
           ></textarea>
-          {/* <div className="modal-content">
-            <h1 className="modal-title">Add Restaurant</h1>
-            <div className="input-wrapper">
-              <i className="fas fa-search icon"></i>
-              <input
-                className="input"
-                type="text"
-                placeholder="Search places"
-              />
-            </div>
-
-            <div className="input-wrapper">
-              <i className="fas fa-utensils icon"></i>
-              <input
-                className="input"
-                type="text"
-                placeholder="Restaurant Category"
-              />
-            </div>
-
-            <textarea
-              className="modal-textarea"
-              name="restaurant-description"
-              id="restaurant-description"
-              cols="30"
-              rows="10"
-              placeholder="Description..."
-            ></textarea> */}
           <div className="rate">
             <input type="radio" id="star5" name="rate" value="5" />
             <label htmlFor="star5" title="text">
@@ -236,23 +274,6 @@ function RestaurantPage(props) {
               ADD
             </button>
           </div>
-          {/* <button className="modal-upload-button" onClick={handleImageUpload}>
-              <i className="fas fa-upload upload-icon"></i> Choose Image
-              <input
-                className="hidden-file-upload-button"
-                type="file"
-                ref={uploadRef}
-              />
-            </button>
-          </div>
-          <div className="buttons-container">
-            <button onClick={handleActionButtonClick} className="action-button">
-              CANCEL
-            </button>
-            <button onClick={handleActionButtonClick} className="action-button">
-              ADD
-            </button>
-          </div> */}
         </AddModal>
       )}
     </div>

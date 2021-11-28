@@ -58,7 +58,7 @@ function App() {
         <Navbar />
         <Routes>
           <Route path="/*" element={<UserPage userPlaces={PLACES_LIST} />} />
-          <Route path="/:placeId/restaurant*" element={<RestaurantPage />} />
+          <Route path="/:placeId/restaurant/*" element={<RestaurantPage />} />
         </Routes>
       </div>
     </Router>

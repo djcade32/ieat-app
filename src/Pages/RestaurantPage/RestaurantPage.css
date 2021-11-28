@@ -178,3 +178,7 @@
 .restaurant-page-input:focus {
   outline-color: var(--hover-effect-color);
 }
+
+.active-page-button {
+  color: var(--hover-effect-color);
+}
