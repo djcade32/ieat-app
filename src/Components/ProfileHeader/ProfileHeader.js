@@ -16,11 +16,11 @@ function ProfileHeader(props) {
       <div className="user-stats">
         <button className="stat-button">
           <p className="stat-number">34</p>
-          <p className="stat-title">visited</p>
+          <p className="stat-title">Visited</p>
         </button>
         <button className="stat-button">
           <p className="stat-number">10</p>
-          <p className="stat-title">not visited</p>
+          <p className="stat-title">Not Visited</p>
         </button>
       </div>
       <hr className="header-hr" />

@@ -1,5 +1,7 @@
 .restaurant-page-container {
-  padding: 1rem;
+  position: relative;
+  padding-right: 1rem;
+  padding-left: 1rem;
 }
 
 .restaurant-header {
@@ -85,6 +87,7 @@
   letter-spacing: 0.05rem;
   color: var(--font-color);
   font-size: 1rem;
+  font-weight: 700;
 }
 
 .restaurant-page-button:hover {
@@ -155,4 +158,23 @@
   display: flex;
   justify-content: space-between;
   align-self: end;
+}
+
+.restaurant-page-input {
+  width: 65%;
+  padding: 0.5rem;
+  margin-left: auto;
+  margin-right: auto;
+  border: none;
+  border-radius: 0.5em;
+  caret-color: var(--font-color);
+  font-family: var(--font-family);
+}
+
+.restaurant-page-input::placeholder {
+  color: var(--font-subtitle-color);
+}
+
+.restaurant-page-input:focus {
+  outline-color: var(--hover-effect-color);
 }
