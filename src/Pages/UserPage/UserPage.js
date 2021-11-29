@@ -1,15 +1,18 @@
 import React, { useState, useRef } from "react";
 import ProfileHeader from "../../Components/ProfileHeader/ProfileHeader";
 import PlacesContainer from "../../Components/PlacesContainer/PlacesContainer";
-import RestaurantCard from "../../Components/RestaurantCard/RestaurantCard";
+import RestaurantCardVisited from "../../Components/RestaurantCards/RestaurantCardVisited";
 import AddModal from "../../Components/AddModal/AddModal";
 
 import profilePic from "../../images/profile-pic-1.jpg";
 
 import "./UserPage.css";
+import StarRating from "../../Components/StarRating/StarRating";
+import RestaurantCardNotVisited from "../../Components/RestaurantCards/RestaurantCardNotVisited";
 
 function UserPage(props) {
   const uploadRef = useRef(null);
+  const [showVisitedList, setShowVisitedList] = useState(true);
   const [showModal, setShowModal] = useState(false);
 
   function handleAddButtonClick() {
@@ -24,24 +27,74 @@ function UserPage(props) {
     uploadRef.current.click();
   }
 
+  function handleListButtonClick(event) {
+    if (event.target.id === "visited" || event.target.id === "visited-stat") {
+      setShowVisitedList(true);
+    } else {
+      setShowVisitedList(false);
+    }
+  }
+
   return (
     <div className="user-page-container">
       <ProfileHeader profilePic={profilePic} />
+      <div className="user-stats">
+        <button
+          id="visited"
+          onClick={handleListButtonClick}
+          className={
+            showVisitedList ? "stat-button active-page-button" : "stat-button"
+          }
+        >
+          <p id="visited-stat" className="stat-number">
+            {props.userPlacesVisited.length}
+          </p>
+          <p id="visited-stat" className="stat-title">
+            Visited
+          </p>
+        </button>
+        <button
+          id="notVisited"
+          onClick={handleListButtonClick}
+          className={
+            showVisitedList ? "stat-button" : "stat-button active-page-button"
+          }
+        >
+          <p className="stat-number">{props.userPlacesNotVisited.length}</p>
+          <p className="stat-title">Not Visited</p>
+        </button>
+      </div>
+      <hr className="header-hr" />
       <PlacesContainer>
-        {props.userPlaces.map((place) => {
-          return (
-            <RestaurantCard
-              key={place.id}
-              id={place.id}
-              title={place.title}
-              img={place.img}
-              location={place.location}
-              category={place.category}
-              price={place.price}
-              rating={place.rating}
-            />
-          );
-        })}
+        {showVisitedList
+          ? props.userPlacesVisited.map((place) => {
+              return (
+                <RestaurantCardVisited
+                  key={place.id}
+                  id={place.id}
+                  title={place.title}
+                  img={place.img}
+                  location={place.location}
+                  category={place.category}
+                  price={place.price}
+                  rating={place.rating}
+                />
+              );
+            })
+          : props.userPlacesNotVisited.map((place) => {
+              return (
+                <RestaurantCardNotVisited
+                  key={place.id}
+                  id={place.id}
+                  title={place.title}
+                  img={place.img}
+                  location={place.location}
+                  category={place.category}
+                  price={place.price}
+                  rating={place.rating}
+                />
+              );
+            })}
       </PlacesContainer>
       <div className="add-control-container">
         <i
@@ -50,66 +103,45 @@ function UserPage(props) {
         ></i>
       </div>
       {showModal && (
-        <AddModal>
-          <div className="modal-content">
-            <h1 className="modal-title">Add Restaurant</h1>
-            <div className="input-wrapper">
-              <i className="fas fa-search icon"></i>
-              <input
-                className="input"
-                type="text"
-                placeholder="Search places"
-              />
-            </div>
-
-            <div className="input-wrapper">
-              <i className="fas fa-utensils icon"></i>
-              <input
-                className="input"
-                type="text"
-                placeholder="Restaurant Category"
-              />
-            </div>
-
-            <textarea
-              className="modal-textarea"
-              name="restaurant-description"
-              id="restaurant-description"
-              cols="30"
-              rows="10"
-              placeholder="Description..."
-            ></textarea>
-            <div className="rate">
-              <input type="radio" id="star5" name="rate" value="5" />
-              <label htmlFor="star5" title="text">
-                5 stars
-              </label>
-              <input type="radio" id="star4" name="rate" value="4" />
-              <label htmlFor="star4" title="text">
-                4 stars
-              </label>
-              <input type="radio" id="star3" name="rate" value="3" />
-              <label htmlFor="star3" title="text">
-                3 stars
-              </label>
-              <input type="radio" id="star2" name="rate" value="2" />
-              <label htmlFor="star2" title="text">
-                2 stars
-              </label>
-              <input type="radio" id="star1" name="rate" value="1" />
-              <label htmlFor="star1" title="text">
-                1 star
-              </label>
-            </div>
-            <button className="modal-upload-button" onClick={handleImageUpload}>
-              <i className="fas fa-upload upload-icon"></i> Choose Image
-              <input
-                className="hidden-file-upload-button"
-                type="file"
-                ref={uploadRef}
-              />
-            </button>
+        <AddModal class="add-modal-height">
+          <h1 className="modal-title">Add Restaurant</h1>
+          <div className="input-wrapper">
+            <i className="fas fa-search icon"></i>
+            <input className="input" type="text" placeholder="Search places" />
           </div>
+
+          <div className="input-wrapper">
+            <i className="fas fa-utensils icon"></i>
+            <input
+              className="input"
+              type="text"
+              placeholder="Restaurant Category"
+            />
+          </div>
+
+          <select className="restaurant-page-input" name="price" id="price">
+            <option value="$">$</option>
+            <option value="$$">$$</option>
+            <option value="$$$">$$$</option>
+          </select>
+
+          <textarea
+            className="modal-textarea"
+            name="restaurant-description"
+            id="restaurant-description"
+            cols="30"
+            rows="10"
+            placeholder="Description..."
+          ></textarea>
+          <StarRating />
+          <button className="modal-upload-button" onClick={handleImageUpload}>
+            <i className="fas fa-upload upload-icon"></i> Choose Image
+            <input
+              className="hidden-file-upload-button"
+              type="file"
+              ref={uploadRef}
+            />
+          </button>
           <div className="buttons-container">
             <button onClick={handleActionButtonClick} className="action-button">
               CANCEL

@@ -4,142 +4,10 @@ import { useParams } from "react-router-dom";
 import PlacesContainer from "../../Components/PlacesContainer/PlacesContainer";
 import AddModal from "../../Components/AddModal/AddModal";
 
-import placeImg1 from "../../images/place-img-1.jpg";
-import placeImg2 from "../../images/place-img-2.jpg";
-import placeImg3 from "../../images/place-img-3.jpg";
-
-import placeImg3Meal1 from "../../images/meal-3-img-1.jpg";
-import placeImg3Meal2 from "../../images/meal-3-img-2.jpg";
-import placeImg3Drink1 from "../../images/drink-3-img-1.jpg";
-import placeImg3Drink2 from "../../images/drink-3-img-2.png";
-
-import placeImg1Meal1 from "../../images/meal-1-img-1.jpg";
-import placeImg2Meal1 from "../../images/meal-2-img-1.jpg";
-import placeImg2Meal2 from "../../images/meal-2-img-2.jpg";
-
-import placeImg1Drink1 from "../../images/drink-1-img-1.jpg";
-
 import "./RestaurantPage.css";
 import ItemCard from "../../Components/ItemCard/ItemCard";
-
-const PLACES_LIST = [
-  {
-    id: "placeImg3",
-    img: placeImg3,
-    title: "Tatte Bakery & Cafe",
-    location: "1200 New Hampshire Ave NW, Washington, DC",
-    category: "Cafe",
-    price: "$$",
-    rating: 4.5,
-    description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis maiores sint dolores possimus libero cupiditate.",
-    meals: [
-      {
-        id: "placeImg3Meal1",
-        img: placeImg3Meal1,
-        title: "Strawberry French Toast",
-        description:
-          "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptas, earum.",
-        price: "$11.50",
-        rating: 5,
-      },
-      {
-        id: "placeImg3Meal2",
-        img: placeImg3Meal2,
-        title: "Chevy Soup",
-        description:
-          "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptas, earum.",
-        price: "$12.99",
-        rating: 4,
-      },
-    ],
-    drinks: [
-      {
-        id: "placeImg3Drink1",
-        img: placeImg3Drink1,
-        title: "Iced Caramel Latte",
-        description:
-          "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptas, earum.",
-        price: "$5.00",
-        rating: 3,
-      },
-      {
-        id: "placeImg3Drink2",
-        img: placeImg3Drink2,
-        title: "Hot Chocolate",
-        description:
-          "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptas, earum.",
-        price: "$3.99",
-        rating: 4,
-      },
-    ],
-  },
-  {
-    id: "placeImg2",
-    img: placeImg2,
-    title: "The Executive Diner",
-    location: "1400 Duke St, Alexandria, VA",
-    category: "Diner",
-    price: "$",
-    rating: 3.5,
-    description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis maiores sint dolores possimus libero cupiditate.",
-    meals: [
-      {
-        id: "placeImg2Meal1",
-        img: placeImg2Meal1,
-        title: "Cheescake",
-        description:
-          "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptas, earum.",
-        price: "$7.50",
-        rating: 4,
-      },
-      {
-        id: "placeImg2Meal2",
-        img: placeImg2Meal2,
-        title: "Fried Shrimp Tacos",
-        description:
-          "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptas, earum.",
-        price: "$11.99",
-        rating: 4,
-      },
-    ],
-    drinks: [],
-  },
-  {
-    id: "placeImg1",
-    img: placeImg1,
-    title: "Misha's",
-    location: "917 King St, Alexandria, VA",
-    category: "Cafe",
-    price: "$$",
-    rating: 4,
-    description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis maiores sint dolores possimus libero cupiditate. Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis maiores sint dolores possimus libero cupiditate.",
-    meals: [
-      {
-        id: "placeImg1Meal1",
-        img: placeImg1Meal1,
-        title: "Rasberry Pastry",
-        description:
-          "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptas, earum.",
-        price: "$3.50",
-        rating: 5,
-      },
-    ],
-    drinks: [
-      {
-        id: "placeImg1Drink1",
-        img: placeImg1Drink1,
-        title: "Caramel Machiato",
-        description:
-          "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptas, earum.",
-        price: "$4.00",
-        rating: 3,
-      },
-    ],
-  },
-];
+import StarRating from "../../Components/StarRating/StarRating";
+import { PLACES_VISITED_LIST } from "../../data/User/placesVisitedList";
 
 function RestaurantPage(props) {
   const [showModal, setShowModal] = useState(false);
@@ -149,11 +17,11 @@ function RestaurantPage(props) {
 
   const placeId = useParams().placeId;
 
-  const identifiedPlace = PLACES_LIST.find((p) => p.id === placeId);
+  const identifiedPlace = PLACES_VISITED_LIST.find((p) => p.id === placeId);
   if (!identifiedPlace) {
     return (
       <div className="center">
-        <h2>Could not find place!</h2>
+        <h2 style={{ textAlign: "center" }}>Could not find place!</h2>
       </div>
     );
   }
@@ -278,6 +146,11 @@ function RestaurantPage(props) {
             type="text"
             placeholder="Name"
           />
+          <input
+            className="restaurant-page-input"
+            type="number"
+            placeholder="Price"
+          />
           <textarea
             className="modal-textarea"
             name="restaurant-description"
@@ -286,28 +159,7 @@ function RestaurantPage(props) {
             rows="10"
             placeholder="Description..."
           ></textarea>
-          <div className="rate">
-            <input type="radio" id="star5" name="rate" value="5" />
-            <label htmlFor="star5" title="text">
-              5 stars
-            </label>
-            <input type="radio" id="star4" name="rate" value="4" />
-            <label htmlFor="star4" title="text">
-              4 stars
-            </label>
-            <input type="radio" id="star3" name="rate" value="3" />
-            <label htmlFor="star3" title="text">
-              3 stars
-            </label>
-            <input type="radio" id="star2" name="rate" value="2" />
-            <label htmlFor="star2" title="text">
-              2 stars
-            </label>
-            <input type="radio" id="star1" name="rate" value="1" />
-            <label htmlFor="star1" title="text">
-              1 star
-            </label>
-          </div>
+          <StarRating />
           <button className="modal-upload-button" onClick={handleImageUpload}>
             <i className="fas fa-upload upload-icon"></i> Choose Image
             <input

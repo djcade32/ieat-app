@@ -1,0 +1,35 @@
+.restaurant-card-not-visited-container {
+  display: grid;
+  grid-template-columns: 0.6fr 1.4fr;
+  gap: 0.5rem;
+  background-color: var(--card-bg-color);
+  overflow: hidden;
+  border-radius: 0.5rem;
+  height: 8rem;
+  color: var(--font-color);
+  font-size: 0.9rem;
+  object-fit: contain;
+  margin-bottom: 2rem;
+  margin-right: 0.5rem;
+  margin-left: 0.5rem;
+  box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.36);
+}
+
+.restaurant-card-not-visited-container:last-of-type {
+  margin-bottom: 0;
+}
+
+.restaurant-card-not-visited-button {
+  background-color: var(--bg-color);
+  border: none;
+  outline: none;
+  padding: 0.25rem;
+  border-radius: 0.25rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.restaurant-card-not-visited-button:hover {
+  background-color: var(--font-subtitle-color);
+  color: var(--bg-color);
+}

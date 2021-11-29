@@ -16,11 +16,13 @@
   justify-content: space-around;
 }
 
+.add-modal-height {
+  height: 50rem;
+}
+
 .modal-title {
   font-family: var(--font-family-name-2);
   font-size: 1.5rem;
-  margin-bottom: 1rem;
-  margin-top: 2rem;
 }
 
 .input {
@@ -28,7 +30,6 @@
   padding-left: 2rem;
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
-  margin-bottom: 1rem;
   border: none;
   border-radius: 0.5em;
   caret-color: var(--font-color);
@@ -47,7 +48,6 @@
   resize: none;
   width: 65%;
   padding: 0.5rem;
-  margin-bottom: 1rem;
   margin-left: auto;
   margin-right: auto;
   border: none;
@@ -115,48 +115,9 @@
 .buttons-container {
   display: flex;
   justify-content: space-around;
-  margin-top: 2rem;
-  margin-bottom: 2rem;
 }
 
-/* Star Rating Css */
-
-.rate {
-  height: 2rem;
-  display: flex;
-  justify-content: center;
-  gap: 0.25rem;
-  flex-direction: row-reverse;
-  margin-bottom: 1rem;
-  cursor: pointer;
-}
-.rate:not(:checked) > input {
-  position: absolute;
-  top: -9999px;
-}
-.rate:not(:checked) > label {
-  float: right;
-  width: 1em;
-  overflow: hidden;
-  white-space: nowrap;
-  cursor: pointer;
-  font-size: 30px;
-  color: #ccc;
-}
-.rate:not(:checked) > label:before {
-  content: "★ ";
-}
-.rate > input:checked ~ label {
-  color: #ffc700;
-}
-.rate:not(:checked) > label:hover,
-.rate:not(:checked) > label:hover ~ label {
-  color: #deb217;
-}
-.rate > input:checked + label:hover,
-.rate > input:checked + label:hover ~ label,
-.rate > input:checked ~ label:hover,
-.rate > input:checked ~ label:hover ~ label,
-.rate > label:hover ~ input:checked ~ label {
-  color: #c59b08;
+.modal-container {
+  background-color: var(--card-bg-color);
+  text-align: center;
 }

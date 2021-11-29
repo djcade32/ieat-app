@@ -1,5 +1,5 @@
 import React from "react";
-import "./RestaurantCard.css";
+import "./RestaurantCardVisited.css";
 import { Link } from "react-router-dom";
 
 function RestaurantCard(props) {

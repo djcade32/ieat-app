@@ -68,10 +68,12 @@
 
 .place-category {
   color: var(--font-subtitle-color);
+  align-self: end;
 }
 
 .place-price {
   color: var(--font-subtitle-color);
+  align-self: end;
 }
 
 .stat-wrapper {
