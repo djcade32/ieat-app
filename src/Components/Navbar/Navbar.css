@@ -39,3 +39,7 @@
   cursor: pointer;
   color: var(--hover-effect-color);
 }
+
+.drawer-nav {
+  height: 100%;
+}
