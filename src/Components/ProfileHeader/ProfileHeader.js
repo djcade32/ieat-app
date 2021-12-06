@@ -7,9 +7,9 @@ function ProfileHeader(props) {
       <div className="header">
         <img className="profile-pic" src={props.profilePic} alt="profile" />
         <div className="user-info">
-          <h2 className="username">Mike Abel</h2>
+          <h2 className="username">{props.name}</h2>
           <p className="user-location">
-            <em>Washington, D.C.</em>
+            <em>{props.location}</em>
           </p>
         </div>
       </div>

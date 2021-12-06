@@ -6,7 +6,11 @@ function ItemCard(props) {
     <li className="place-item-container">
       <img className="place-item-image" src={props.img} alt="meal" />
       <div className="place-item-info-wrapper">
-        <h2 className="place-item-name">{props.title}</h2>
+        <div className="place-item-info-wrapper-top">
+          <h2 className="place-item-name">{props.title}</h2>
+          <i className="fas fa-pen place-item-edit-icon"></i>
+        </div>
+
         <div className="place-item-description-wrapper">
           <p className="place-item-description">
             <em>{props.description}</em>

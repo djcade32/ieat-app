@@ -55,11 +55,18 @@ function RestaurantPage(props) {
           alt={identifiedPlace.id}
         />
         <div className="restaurant-info-wrapper">
-          <h2 className="restaurant-name">{identifiedPlace.title}</h2>
-          <div className="restaurant-stats">
-            <p className="restaurant-location">
-              <em>{identifiedPlace.location}</em>
-            </p>
+          <div className="restaurant-info-wrapper-top">
+            <h2 className="restaurant-name">{identifiedPlace.title}</h2>
+            <i class="fas fa-pen restaurant-page-edit-icon"></i>
+          </div>
+
+          <div className="restaurant-info-wrapper-bottom">
+            <div className="restaurant-location-wrapper">
+              <i className="fas fa-map-marker-alt restaurant-location-marker"></i>
+              <p className="restaurant-location">
+                <em>{identifiedPlace.location}</em>
+              </p>
+            </div>
             <div className="restaurant-rating">
               <p className="rating">{identifiedPlace.rating}</p>
               <i className="far fa-star star"></i>

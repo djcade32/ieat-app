@@ -1,10 +1,11 @@
 import React, { useState, useRef } from "react";
+import { useParams } from "react-router-dom";
 import ProfileHeader from "../../Components/ProfileHeader/ProfileHeader";
 import PlacesContainer from "../../Components/PlacesContainer/PlacesContainer";
 import RestaurantCardVisited from "../../Components/RestaurantCards/RestaurantCardVisited";
 import AddModal from "../../Components/AddModal/AddModal";
 
-import profilePic from "../../images/profile-pic-1.jpg";
+import { USERS_LIST } from "../../data/Users/UsersList";
 
 import "./UserPage.css";
 import StarRating from "../../Components/StarRating/StarRating";
@@ -12,6 +13,7 @@ import RestaurantCardNotVisited from "../../Components/RestaurantCards/Restauran
 
 function UserPage(props) {
   const uploadRef = useRef(null);
+  const userId = useParams().userId;
   const [showVisitedList, setShowVisitedList] = useState(true);
   const [showModal, setShowModal] = useState(false);
 
@@ -35,9 +37,22 @@ function UserPage(props) {
     }
   }
 
+  const identifiedUser = USERS_LIST.find((u) => u.id === userId);
+  if (!identifiedUser) {
+    return (
+      <div className="center">
+        <h2 style={{ textAlign: "center" }}>Could not find user!</h2>
+      </div>
+    );
+  }
+
   return (
     <div className="user-page-container">
-      <ProfileHeader profilePic={profilePic} />
+      <ProfileHeader
+        name={identifiedUser.name}
+        profilePic={identifiedUser.profilePic}
+        location={identifiedUser.location}
+      />
       <div className="user-stats">
         <button
           id="visited"

@@ -40,7 +40,29 @@
   margin-bottom: 1rem;
 }
 
-.restaurant-stats {
+.restaurant-location-wrapper {
+  align-items: center;
+  display: flex;
+  gap: 0.2rem;
+  grid-area: restaurant-location;
+  align-self: end;
+}
+
+.restaurant-location-marker {
+  color: var(--font-color);
+}
+
+.restaurant-info-wrapper-top {
+  display: flex;
+  justify-content: space-between;
+}
+
+.restaurant-page-edit-icon:hover {
+  color: var(--hover-effect-color);
+  cursor: pointer;
+}
+
+.restaurant-info-wrapper-bottom {
   display: grid;
   grid-auto-rows: 1fr;
   grid-template-columns: 1.6fr 0.4fr;
@@ -62,10 +84,10 @@
 .restaurant-description {
   grid-area: restaurant-description;
 }
-.restaurant-location {
+/* .restaurant-location {
   grid-area: restaurant-location;
   align-self: end;
-}
+} */
 
 .restaurant-description-container {
   background-color: var(--card-bg-color);

@@ -7,7 +7,7 @@ function NavLinks(props) {
   return (
     <ul className="nav-links">
       <li>
-        <NavLink to="/*">HOME</NavLink>
+        <NavLink to="/">HOME</NavLink>
       </li>
       <li>
         <NavLink to="/u1/places">VIEW MAP</NavLink>

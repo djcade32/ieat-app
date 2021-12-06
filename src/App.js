@@ -12,6 +12,7 @@ import UserPage from "./Pages/UserPage/UserPage";
 import RestaurantPage from "./Pages/RestaurantPage/RestaurantPage";
 import { PLACES_VISITED_LIST } from "./data/User/placesVisitedList";
 import { PLACES_NOT_VISITED_LIST } from "./data/User/placesNotVisitedList";
+import LoginPage from "./Pages/LoginPage/LoginPage";
 
 function App() {
   return (
@@ -19,8 +20,9 @@ function App() {
       <div className="App">
         <Navbar />
         <Routes>
+          <Route path="/*" element={<LoginPage />} />
           <Route
-            path="/*"
+            path="/:userId/*"
             element={
               <UserPage
                 userPlacesVisited={PLACES_VISITED_LIST}
