@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
 import "./LoginPage.css";
-import { USERS_LIST } from "../../data/Users/UsersList";
-import RestaurantPage from "../RestaurantPage/RestaurantPage";
+import { USERS_LIST } from "../../../data/Users/UsersList";
+import { useNavigate } from "react-router-dom";
 
-function LoginPage() {
+function LoginPage(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  let navigate = useNavigate();
 
   function emailInputHandler(event) {
     setEmail(event.target.value);
@@ -16,24 +16,32 @@ function LoginPage() {
     setPassword(event.target.value);
   }
 
-  function signInHandler() {
+  function signupHandler() {
+    props.signupHandler();
+  }
+
+  function formSubmitHandler(event) {
+    event.preventDefault();
     const identifiedUser = USERS_LIST.find((u) => u.email === email);
     if (!identifiedUser) {
       return console.log("incorrect credentials");
     } else if (identifiedUser.password === password) {
+      let route = `/${identifiedUser.id}`;
       console.log("Succesfully logged in");
+      navigate(route, { replace: true });
     }
   }
   return (
-    <div className="login-page">
-      <div className="login-page-card">
-        <h2 className="login-page-title">Log In</h2>
+    <div className="login-page-card">
+      <h2 className="login-page-title">LOG IN</h2>
+      <form onSubmit={formSubmitHandler} autoComplete="off">
         <div className="login-page-input-wrapper">
           <input
             onChange={emailInputHandler}
             type="email"
             placeholder="Email"
             value={email}
+            autoComplete="off"
           />
         </div>
         <div className="login-page-input-wrapper">
@@ -42,20 +50,24 @@ function LoginPage() {
             type="password"
             placeholder="Password"
             value={password}
+            autoComplete="off"
           />
         </div>
         <div className="login-page-action-buttons">
           <button
+            type="submit"
             className="login-page-button login-page-sign-in-button"
-            onClick={signInHandler}
           >
             SIGN IN
           </button>
-          <button className="login-page-button login-page-sign-up-button">
+          <button
+            className="login-page-button login-page-sign-up-button"
+            onClick={signupHandler}
+          >
             SIGN UP
           </button>
         </div>
-      </div>
+      </form>
     </div>
   );
 }

@@ -1,0 +1,73 @@
+.login-page-card {
+  background-color: var(--card-bg-color);
+  border-radius: 0.5rem;
+  text-align: center;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 70%;
+  margin-right: auto;
+  margin-left: auto;
+  box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.36);
+}
+
+.login-page-title {
+  font-size: 1.5rem;
+}
+
+.login-page-input-wrapper {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.login-page-input-wrapper > input {
+  width: 75%;
+  border-radius: 0.5em;
+  border: none;
+  padding: 0.25rem;
+}
+
+.login-page-input-wrapper > input:focus {
+  outline-color: var(--hover-effect-color);
+}
+
+.login-page-input-wrapper > input::placeholder {
+  padding: 0.5rem;
+  color: var(--font-subtitle-color);
+}
+
+.login-page-button {
+  width: 75%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0.25rem;
+  border-radius: 0.5em;
+  border: none;
+}
+
+.login-page-sign-in-button {
+  background-color: var(--font-color);
+  outline: var(--font-color) solid 1px;
+  color: white;
+  margin-bottom: 1rem;
+}
+
+.login-page-sign-in-button:hover {
+  background-color: var(--hover-effect-color);
+  cursor: pointer;
+}
+
+.login-page-sign-up-button {
+  color: white;
+  background-color: transparent;
+  outline: white solid 1px;
+}
+
+.login-page-sign-up-button:hover {
+  background-color: white;
+  color: var(--font-color);
+  cursor: pointer;
+  outline: var(--font-color) solid 1px;
+}

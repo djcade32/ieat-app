@@ -57,7 +57,7 @@ function RestaurantPage(props) {
         <div className="restaurant-info-wrapper">
           <div className="restaurant-info-wrapper-top">
             <h2 className="restaurant-name">{identifiedPlace.title}</h2>
-            <i class="fas fa-pen restaurant-page-edit-icon"></i>
+            <i className="fas fa-pen restaurant-page-edit-icon"></i>
           </div>
 
           <div className="restaurant-info-wrapper-bottom">
