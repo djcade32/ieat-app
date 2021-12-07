@@ -145,4 +145,6 @@
 .restaurant-modal-title {
   font-family: var(--font-family-name-2);
   font-size: 1.5rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
 }

@@ -11,18 +11,20 @@
   border-top-left-radius: 2rem;
   border-top-right-radius: 2rem;
   text-align: center;
-  display: flex;
+  /* display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: space-around; */
 }
 
 .add-modal-height {
-  height: 50rem;
+  height: 40rem;
 }
 
 .modal-title {
   font-family: var(--font-family-name-2);
   font-size: 1.5rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
 }
 
 .input {

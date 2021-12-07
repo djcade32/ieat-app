@@ -140,49 +140,57 @@ function RestaurantPage(props) {
       {showModal && (
         <AddModal>
           <h1 className="restaurant-modal-title">Add Meal or Drink</h1>
-          <select
-            className="restaurant-page-input"
-            name="foodType"
-            id="foodType"
-          >
-            <option value="meal">Meal</option>
-            <option value="drink">Drink</option>
-          </select>
-          <input
-            className="restaurant-page-input"
-            type="text"
-            placeholder="Name"
-          />
-          <input
-            className="restaurant-page-input"
-            type="number"
-            placeholder="Price"
-          />
-          <textarea
-            className="modal-textarea"
-            name="restaurant-description"
-            id="restaurant-description"
-            cols="30"
-            rows="10"
-            placeholder="Description..."
-          ></textarea>
-          <StarRating />
-          <button className="modal-upload-button" onClick={handleImageUpload}>
-            <i className="fas fa-upload upload-icon"></i> Choose Image
+          <form className="add-modal-form">
+            <select
+              className="restaurant-page-input"
+              name="foodType"
+              id="foodType"
+            >
+              <option value="meal">Meal</option>
+              <option value="drink">Drink</option>
+            </select>
             <input
-              className="hidden-file-upload-button"
-              type="file"
-              ref={uploadRef}
+              className="restaurant-page-input"
+              type="text"
+              placeholder="Name"
             />
-          </button>
-          <div className="buttons-container">
-            <button onClick={handleActionButtonClick} className="action-button">
-              CANCEL
+            <input
+              className="restaurant-page-input"
+              type="number"
+              placeholder="Price"
+            />
+            <textarea
+              className="modal-textarea"
+              name="restaurant-description"
+              id="restaurant-description"
+              cols="30"
+              rows="10"
+              placeholder="Description..."
+            ></textarea>
+            <StarRating />
+            <button className="modal-upload-button" onClick={handleImageUpload}>
+              <i className="fas fa-upload upload-icon"></i> Choose Image
+              <input
+                className="hidden-file-upload-button"
+                type="file"
+                ref={uploadRef}
+              />
             </button>
-            <button onClick={handleActionButtonClick} className="action-button">
-              ADD
-            </button>
-          </div>
+            <div className="buttons-container">
+              <button
+                onClick={handleActionButtonClick}
+                className="action-button"
+              >
+                CANCEL
+              </button>
+              <button
+                onClick={handleActionButtonClick}
+                className="action-button"
+              >
+                ADD
+              </button>
+            </div>
+          </form>
         </AddModal>
       )}
     </div>

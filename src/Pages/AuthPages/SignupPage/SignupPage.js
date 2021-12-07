@@ -93,6 +93,7 @@ function SignupPage(props) {
           />
         </div>
         <button
+          type="button"
           className="signup-page-button signup-page-upload-button"
           onClick={handleImageUploadClick}
         >
