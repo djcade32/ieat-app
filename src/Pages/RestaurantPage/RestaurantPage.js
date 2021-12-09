@@ -7,23 +7,57 @@ import AddModal from "../../Components/AddModal/AddModal";
 import "./RestaurantPage.css";
 import ItemCard from "../../Components/ItemCard/ItemCard";
 import StarRating from "../../Components/StarRating/StarRating";
-import { PLACES_VISITED_LIST } from "../../data/User/placesVisitedList";
+import { useSelector, useDispatch } from "react-redux";
+import itemImg from "../../images/meal-6-img-1.jpg";
+import { placesActions } from "../../store/places";
 
 function RestaurantPage(props) {
+  const dispatch = useDispatch();
+
+  const placesList = useSelector((state) => state.places.placesList);
+
   const [showModal, setShowModal] = useState(false);
   const [showMealList, setShowMealList] = useState(true);
+
+  const [itemTitle, setItemTitle] = useState("");
+  const [itemPrice, setItemPrice] = useState("");
+  const [itemRating, setItemRating] = useState("");
+  const [itemDescription, setItemDescription] = useState("");
+  const [foodType, setFoodType] = useState("meal");
 
   const uploadRef = useRef(null);
 
   const placeId = useParams().placeId;
 
-  const identifiedPlace = PLACES_VISITED_LIST.find((p) => p.id === placeId);
+  const identifiedPlace = placesList.find((p) => p.id === placeId);
   if (!identifiedPlace) {
     return (
       <div className="center">
         <h2 style={{ textAlign: "center" }}>Could not find place!</h2>
       </div>
     );
+  }
+
+  function itemTitleHandler(event) {
+    setItemTitle(event.target.value);
+  }
+
+  function itemPriceHandler(event) {
+    setItemPrice(event.target.value);
+  }
+
+  function itemDescriptionHandler(event) {
+    setItemDescription(event.target.value);
+  }
+
+  function itemRatingHandler(value) {
+    console.log("user page: " + value);
+    setItemRating(value);
+  }
+
+  function itemFoodTypeHandler(event) {
+    console.log(event.target.value);
+    setFoodType(event.target.value);
   }
 
   function handleAddButtonClick() {
@@ -44,6 +78,28 @@ function RestaurantPage(props) {
     } else {
       setShowMealList(false);
     }
+  }
+
+  function formSubmitHandler(event) {
+    event.preventDefault();
+    handleActionButtonClick();
+    const newItem = {
+      id: "item" + Math.floor(Math.random() * 100),
+      img: itemImg,
+      title: itemTitle,
+      description: itemDescription,
+      price: itemPrice,
+      rating: itemRating,
+    };
+    if (foodType === "meal") {
+      dispatch(placesActions.addMeal({ placeId: placeId, item: newItem }));
+    } else {
+      dispatch(placesActions.addDrink({ placeId: placeId, item: newItem }));
+    }
+
+    console.log("New item created.");
+    console.log(newItem);
+    setItemRating(0);
   }
 
   return (
@@ -140,8 +196,9 @@ function RestaurantPage(props) {
       {showModal && (
         <AddModal>
           <h1 className="restaurant-modal-title">Add Meal or Drink</h1>
-          <form className="add-modal-form">
+          <form onSubmit={formSubmitHandler} className="add-modal-form">
             <select
+              onChange={itemFoodTypeHandler}
               className="restaurant-page-input"
               name="foodType"
               id="foodType"
@@ -150,25 +207,35 @@ function RestaurantPage(props) {
               <option value="drink">Drink</option>
             </select>
             <input
+              onChange={itemTitleHandler}
               className="restaurant-page-input"
               type="text"
               placeholder="Name"
+              value={itemTitle}
             />
             <input
+              onChange={itemPriceHandler}
               className="restaurant-page-input"
               type="number"
               placeholder="Price"
+              value={itemPrice}
             />
             <textarea
+              onChange={itemDescriptionHandler}
               className="modal-textarea"
               name="restaurant-description"
               id="restaurant-description"
               cols="30"
               rows="10"
               placeholder="Description..."
+              value={itemDescription}
             ></textarea>
-            <StarRating />
-            <button className="modal-upload-button" onClick={handleImageUpload}>
+            <StarRating ratingHandler={itemRatingHandler} />
+            <button
+              type="button"
+              className="modal-upload-button"
+              onClick={handleImageUpload}
+            >
               <i className="fas fa-upload upload-icon"></i> Choose Image
               <input
                 className="hidden-file-upload-button"
@@ -178,15 +245,13 @@ function RestaurantPage(props) {
             </button>
             <div className="buttons-container">
               <button
+                type="button"
                 onClick={handleActionButtonClick}
                 className="action-button"
               >
                 CANCEL
               </button>
-              <button
-                onClick={handleActionButtonClick}
-                className="action-button"
-              >
+              <button type="submit" className="action-button">
                 ADD
               </button>
             </div>

@@ -1,6 +1,8 @@
 import placeImg1 from "../../images/place-img-1.jpg";
 import placeImg2 from "../../images/place-img-2.jpg";
 import placeImg3 from "../../images/place-img-3.jpg";
+import placeImg4 from "../../images/place-img-4.jpg";
+import placeImg5 from "../../images/place-img-5.jpg";
 
 import placeImg3Meal1 from "../../images/meal-3-img-1.jpg";
 import placeImg3Meal2 from "../../images/meal-3-img-2.jpg";
@@ -13,7 +15,7 @@ import placeImg2Meal2 from "../../images/meal-2-img-2.jpg";
 
 import placeImg1Drink1 from "../../images/drink-1-img-1.jpg";
 
-export const PLACES_VISITED_LIST = [
+export const PLACES_LIST = [
   {
     id: "placeImg3",
     img: placeImg3,
@@ -24,6 +26,7 @@ export const PLACES_VISITED_LIST = [
     rating: 4.5,
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis maiores sint dolores possimus libero cupiditate.",
+    visited: true,
     meals: [
       {
         id: "placeImg3Meal1",
@@ -75,6 +78,7 @@ export const PLACES_VISITED_LIST = [
     rating: 3.5,
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis maiores sint dolores possimus libero cupiditate.",
+    visited: true,
     meals: [
       {
         id: "placeImg2Meal1",
@@ -107,6 +111,7 @@ export const PLACES_VISITED_LIST = [
     rating: 4,
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis maiores sint dolores possimus libero cupiditate. Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis maiores sint dolores possimus libero cupiditate.",
+    visited: true,
     meals: [
       {
         id: "placeImg1Meal1",
@@ -129,5 +134,33 @@ export const PLACES_VISITED_LIST = [
         rating: 3,
       },
     ],
+  },
+  {
+    id: "placeImg4",
+    img: placeImg4,
+    title: "Royal Restaurant & Caterers",
+    location: "730 N St Asaph St, Alexandria, VA",
+    category: "Italian",
+    price: "$$",
+    rating: 5,
+    description:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis maiores sint dolores possimus libero cupiditate.",
+    visited: false,
+    meals: [],
+    drinks: [],
+  },
+  {
+    id: "placeImg5",
+    img: placeImg5,
+    title: "Smokecraft Modern Barbecue",
+    location: "1051 N Highland St, Arlington, VA",
+    category: "BBQ",
+    price: "$$",
+    rating: 4,
+    description:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis maiores sint dolores possimus libero cupiditate.",
+    visited: false,
+    meals: [],
+    drinks: [],
   },
 ];

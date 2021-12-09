@@ -11,12 +11,18 @@ import "./UserPage.css";
 import StarRating from "../../Components/StarRating/StarRating";
 import RestaurantCardNotVisited from "../../Components/RestaurantCards/RestaurantCardNotVisited";
 import placeImg from "../../images/place-img-6.jpg";
-import { PLACES_VISITED_LIST } from "../../data/User/placesVisitedList";
-import { PLACES_NOT_VISITED_LIST } from "../../data/User/placesNotVisitedList";
+import { useSelector, useDispatch } from "react-redux";
+import { placesActions } from "../../store/places";
 
-function UserPage(props) {
+// You may need to add redux so that all components will have the same list when it is updated
+function UserPage() {
+  const dispatch = useDispatch();
+
+  const placesList = useSelector((state) => state.places.placesList);
+
   const uploadRef = useRef(null);
   const userId = useParams().userId;
+
   const [showVisitedList, setShowVisitedList] = useState(true);
   const [showModal, setShowModal] = useState(false);
 
@@ -81,7 +87,8 @@ function UserPage(props) {
     );
   }
 
-  function formSubmitHandler() {
+  function formSubmitHandler(event) {
+    event.preventDefault();
     handleActionButtonClick();
     const newPlace = {
       id: "place" + Math.floor(Math.random() * 100),
@@ -92,16 +99,21 @@ function UserPage(props) {
       price: placePrice,
       rating: placeRating,
       description: placeDescription,
+      visited: showVisitedList ? true : false,
       meals: [],
       drinks: [],
     };
     if (showVisitedList) {
-      PLACES_VISITED_LIST.push(newPlace);
-    } else {
-      PLACES_NOT_VISITED_LIST.push(newPlace);
+      dispatch(placesActions.addPlace(newPlace));
     }
 
     console.log("New place created.");
+    console.log(newPlace);
+    setPlaceRating(0);
+  }
+
+  function placeVisitedHandler(placeId) {
+    dispatch(placesActions.changeToVisited(placeId));
   }
 
   return (
@@ -120,7 +132,7 @@ function UserPage(props) {
           }
         >
           <p id="visited-stat" className="stat-number">
-            {props.userPlacesVisited.length}
+            {placesList.filter((place) => place.visited === true).length}
           </p>
           <p id="visited-stat" className="stat-title">
             Visited
@@ -133,41 +145,47 @@ function UserPage(props) {
             showVisitedList ? "stat-button" : "stat-button active-page-button"
           }
         >
-          <p className="stat-number">{props.userPlacesNotVisited.length}</p>
+          <p className="stat-number">
+            {placesList.filter((place) => place.visited === false).length}
+          </p>
           <p className="stat-title">Not Visited</p>
         </button>
       </div>
       <hr className="header-hr" />
       <PlacesContainer>
         {showVisitedList
-          ? props.userPlacesVisited.map((place) => {
-              return (
-                <RestaurantCardVisited
-                  key={place.id}
-                  id={place.id}
-                  title={place.title}
-                  img={place.img}
-                  location={place.location}
-                  category={place.category}
-                  price={place.price}
-                  rating={place.rating}
-                />
-              );
-            })
-          : props.userPlacesNotVisited.map((place) => {
-              return (
-                <RestaurantCardNotVisited
-                  key={place.id}
-                  id={place.id}
-                  title={place.title}
-                  img={place.img}
-                  location={place.location}
-                  category={place.category}
-                  price={place.price}
-                  rating={place.rating}
-                />
-              );
-            })}
+          ? placesList
+              .filter((place) => place.visited === true)
+              .map((place) => {
+                return (
+                  <RestaurantCardVisited
+                    key={place.id}
+                    id={place.id}
+                    title={place.title}
+                    img={place.img}
+                    location={place.location}
+                    category={place.category}
+                    price={place.price}
+                    rating={place.rating}
+                  />
+                );
+              })
+          : placesList
+              .filter((place) => place.visited === false)
+              .map((place) => {
+                return (
+                  <RestaurantCardNotVisited
+                    key={place.id}
+                    id={place.id}
+                    title={place.title}
+                    img={place.img}
+                    location={place.location}
+                    category={place.category}
+                    price={place.price}
+                    placeVisitedHandler={placeVisitedHandler}
+                  />
+                );
+              })}
       </PlacesContainer>
       <div className="add-control-container">
         <i
@@ -224,7 +242,7 @@ function UserPage(props) {
             ></textarea>
 
             {showVisitedList && (
-              <StarRating placeRatingHandler={placeRatingHandler} />
+              <StarRating ratingHandler={placeRatingHandler} />
             )}
             <button
               type="button"

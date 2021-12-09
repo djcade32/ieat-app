@@ -2,14 +2,14 @@ import React from "react";
 import "./StarRating.css";
 
 function StarRating(props) {
-  function placeRatingHandler(event) {
+  function ratingHandler(event) {
     console.log(event.target.value);
-    props.placeRatingHandler(event.target.value);
+    props.ratingHandler(event.target.value);
   }
   return (
     <div className="rate">
       <input
-        onChange={placeRatingHandler}
+        onChange={ratingHandler}
         type="radio"
         id="star5"
         name="rate"
@@ -19,7 +19,7 @@ function StarRating(props) {
         5 stars
       </label>
       <input
-        onChange={placeRatingHandler}
+        onChange={ratingHandler}
         type="radio"
         id="star4"
         name="rate"
@@ -29,7 +29,7 @@ function StarRating(props) {
         4 stars
       </label>
       <input
-        onChange={placeRatingHandler}
+        onChange={ratingHandler}
         type="radio"
         id="star3"
         name="rate"
@@ -39,7 +39,7 @@ function StarRating(props) {
         3 stars
       </label>
       <input
-        onChange={placeRatingHandler}
+        onChange={ratingHandler}
         type="radio"
         id="star2"
         name="rate"
@@ -49,7 +49,7 @@ function StarRating(props) {
         2 stars
       </label>
       <input
-        onChange={placeRatingHandler}
+        onChange={ratingHandler}
         type="radio"
         id="star1"
         name="rate"

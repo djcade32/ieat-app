@@ -2,6 +2,9 @@ import React from "react";
 import "./RestaurantCardNotVisited.css";
 
 function RestaurantCardNotVisited(props) {
+  function placeVisitedHandler() {
+    props.placeVisitedHandler(props.id);
+  }
   return (
     <li className="restaurant-card-not-visited-container">
       <img className="place-image" src={props.img} alt={props.title} />
@@ -16,7 +19,10 @@ function RestaurantCardNotVisited(props) {
         <div className="stat-wrapper">
           <p className="place-category">{props.category}</p>
           <p className="place-price">{props.price}</p>
-          <button className="restaurant-card-not-visited-button">
+          <button
+            onClick={placeVisitedHandler}
+            className="restaurant-card-not-visited-button"
+          >
             Visited
           </button>
         </div>
