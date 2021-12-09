@@ -168,7 +168,10 @@ function RestaurantPage(props) {
                   title={meal.title}
                   img={meal.img}
                   description={meal.description}
-                  price={meal.price}
+                  price={new Intl.NumberFormat("en-US", {
+                    style: "currency",
+                    currency: "USD",
+                  }).format(meal.price)}
                   rating={meal.rating}
                 />
               );

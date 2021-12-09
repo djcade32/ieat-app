@@ -34,7 +34,7 @@ export const PLACES_LIST = [
         title: "Strawberry French Toast",
         description:
           "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptas, earum.",
-        price: "$11.50",
+        price: "11.50",
         rating: 5,
       },
       {
@@ -43,7 +43,7 @@ export const PLACES_LIST = [
         title: "Chevy Soup",
         description:
           "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptas, earum.",
-        price: "$12.99",
+        price: "12.99",
         rating: 4,
       },
     ],
@@ -54,7 +54,7 @@ export const PLACES_LIST = [
         title: "Iced Caramel Latte",
         description:
           "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptas, earum.",
-        price: "$5.00",
+        price: "5.00",
         rating: 3,
       },
       {
@@ -86,7 +86,7 @@ export const PLACES_LIST = [
         title: "Cheescake",
         description:
           "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptas, earum.",
-        price: "$7.50",
+        price: "7.50",
         rating: 4,
       },
       {
@@ -95,7 +95,7 @@ export const PLACES_LIST = [
         title: "Fried Shrimp Tacos",
         description:
           "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptas, earum.",
-        price: "$11.99",
+        price: "11.99",
         rating: 4,
       },
     ],
@@ -119,7 +119,7 @@ export const PLACES_LIST = [
         title: "Rasberry Pastry",
         description:
           "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptas, earum.",
-        price: "$3.50",
+        price: "3.50",
         rating: 5,
       },
     ],
@@ -130,7 +130,7 @@ export const PLACES_LIST = [
         title: "Caramel Machiato",
         description:
           "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptas, earum.",
-        price: "$4.00",
+        price: "4.00",
         rating: 3,
       },
     ],

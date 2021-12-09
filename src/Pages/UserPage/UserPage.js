@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import ProfileHeader from "../../Components/ProfileHeader/ProfileHeader";
 import PlacesContainer from "../../Components/PlacesContainer/PlacesContainer";
@@ -13,8 +13,10 @@ import RestaurantCardNotVisited from "../../Components/RestaurantCards/Restauran
 import placeImg from "../../images/place-img-6.jpg";
 import { useSelector, useDispatch } from "react-redux";
 import { placesActions } from "../../store/places";
+import GooglePlacesAutocomplete, {
+  geocodeByPlaceId,
+} from "react-google-places-autocomplete";
 
-// You may need to add redux so that all components will have the same list when it is updated
 function UserPage() {
   const dispatch = useDispatch();
 
@@ -25,21 +27,24 @@ function UserPage() {
 
   const [showVisitedList, setShowVisitedList] = useState(true);
   const [showModal, setShowModal] = useState(false);
-
-  const [placeTitle, setPlaceTitle] = useState("");
-  // const [placeLocation, setPlaceLocation] = useState("");
+  const [placeLocation, setPlaceLocation] = useState("");
   const [placeCategory, setPlaceCategory] = useState("");
   const [placePrice, setPlacePrice] = useState("$");
   const [placeRating, setPlaceRating] = useState("");
   const [placeDescription, setPlaceDescription] = useState("");
+  const [value, setValue] = useState(null);
 
-  function placeTitleHandler(event) {
-    setPlaceTitle(event.target.value);
-  }
-
-  // function placeLocationHandler(event) {
-  //   setPlaceLocation(event.target.value)
-  // }
+  // TODO: Optimize this. This is being called everytime the use selects a restaurant.
+  // Gets the full address of the selected restaurant.
+  useEffect(() => {
+    if (value) {
+      geocodeByPlaceId(value.value.place_id)
+        .then((results) => {
+          setPlaceLocation(results[0].formatted_address);
+        })
+        .catch((error) => console.error(error));
+    }
+  }, [value]);
 
   function placeCategoryHandler(event) {
     setPlaceCategory(event.target.value);
@@ -87,14 +92,20 @@ function UserPage() {
     );
   }
 
-  function formSubmitHandler(event) {
+  async function formSubmitHandler(event) {
     event.preventDefault();
+    // geocodeByPlaceId(value.value.place_id)
+    //   .then((results) => {
+    //     address = results.formatted_address;
+    //   })
+    //   .catch((error) => console.error(error));
+
     handleActionButtonClick();
     const newPlace = {
       id: "place" + Math.floor(Math.random() * 100),
       img: placeImg,
-      title: placeTitle,
-      location: "1114 6th Ave, New York, NY",
+      title: value.value.structured_formatting.main_text,
+      location: placeLocation,
       category: placeCategory,
       price: placePrice,
       rating: placeRating,
@@ -198,14 +209,49 @@ function UserPage() {
           <h1 className="modal-title">Add Restaurant</h1>
           <form onSubmit={formSubmitHandler} className="add-modal-form">
             <div className="input-wrapper">
-              <i className="fas fa-search icon"></i>
+              <i className="fas fa-utensils icon"></i>
+              <GooglePlacesAutocomplete
+                apiKey="AIzaSyA8La_OuuXHnsK2OE9QBqvaVSjWlmDlMr0"
+                autocompletionRequest={{ types: ["establishment"] }}
+                selectProps={{
+                  openMenuOnClick: false,
+                  isClearable: true,
+                  backspaceRemovesValue: true,
+                  // menuIsOpen: true,
+                  styles: {
+                    dropdownIndicator: () => ({
+                      display: "none",
+                    }),
+                    indicatorSeparator: () => ({
+                      display: "none",
+                    }),
+                    container: () => ({
+                      width: "65%",
+                      marginLeft: "auto",
+                      marginRight: "auto",
+                      position: "relative",
+                    }),
+                    control: () => ({
+                      backgroundColor: "white",
+                      border: " none",
+                      borderRadius: " 0.5em",
+                      caretColor: " var(--font-color)",
+                      fontFamily: " var(--font-family)",
+                    }),
+                  },
+                  placeholder: "Search Places",
+                  value,
+                  onChange: setValue,
+                }}
+              />
+              {/* <i className="fas fa-search icon"></i>
               <input
                 onChange={placeTitleHandler}
                 className="input"
                 type="text"
                 placeholder="Search places"
                 value={placeTitle}
-              />
+              /> */}
             </div>
 
             <div className="input-wrapper">
