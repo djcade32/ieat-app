@@ -94,12 +94,6 @@ function UserPage() {
 
   async function formSubmitHandler(event) {
     event.preventDefault();
-    // geocodeByPlaceId(value.value.place_id)
-    //   .then((results) => {
-    //     address = results.formatted_address;
-    //   })
-    //   .catch((error) => console.error(error));
-
     handleActionButtonClick();
     const newPlace = {
       id: "place" + Math.floor(Math.random() * 100),

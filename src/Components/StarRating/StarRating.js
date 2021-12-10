@@ -3,7 +3,6 @@ import "./StarRating.css";
 
 function StarRating(props) {
   function ratingHandler(event) {
-    console.log(event.target.value);
     props.ratingHandler(event.target.value);
   }
   return (

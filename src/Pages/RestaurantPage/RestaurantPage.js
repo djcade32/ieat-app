@@ -10,6 +10,7 @@ import StarRating from "../../Components/StarRating/StarRating";
 import { useSelector, useDispatch } from "react-redux";
 import itemImg from "../../images/meal-6-img-1.jpg";
 import { placesActions } from "../../store/places";
+import EditModal from "../../Components/EditModal/EditModal";
 
 function RestaurantPage(props) {
   const dispatch = useDispatch();
@@ -24,6 +25,7 @@ function RestaurantPage(props) {
   const [itemRating, setItemRating] = useState("");
   const [itemDescription, setItemDescription] = useState("");
   const [foodType, setFoodType] = useState("meal");
+  const [showEditModal, setShowEditModal] = useState(false);
 
   const uploadRef = useRef(null);
 
@@ -102,6 +104,10 @@ function RestaurantPage(props) {
     setItemRating(0);
   }
 
+  function editClickHandler() {
+    setShowEditModal(true);
+  }
+
   return (
     <div className="restaurant-page-container">
       <div className="restaurant-header">
@@ -113,7 +119,10 @@ function RestaurantPage(props) {
         <div className="restaurant-info-wrapper">
           <div className="restaurant-info-wrapper-top">
             <h2 className="restaurant-name">{identifiedPlace.title}</h2>
-            <i className="fas fa-pen restaurant-page-edit-icon"></i>
+            <i
+              onClick={editClickHandler}
+              className="fas fa-pen restaurant-page-edit-icon"
+            ></i>
           </div>
 
           <div className="restaurant-info-wrapper-bottom">
@@ -261,6 +270,7 @@ function RestaurantPage(props) {
           </form>
         </AddModal>
       )}
+      {showEditModal && <EditModal />}
     </div>
   );
 }
