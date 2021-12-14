@@ -29,18 +29,17 @@ function EditModal() {
     identifiedPlace.description
   );
   const [value, setValue] = useState(identifiedPlace.title);
+  const [edited, isEdited] = useState(false);
+  useEffect(() => {
+    if (edited) {
+      geocodeByPlaceId(value.value.place_id)
+        .then((results) => {
+          setPlaceLocation(results[0].formatted_address);
+        })
+        .catch((error) => console.error(error));
+    }
+  }, [edited]);
 
-  //   useEffect(() => {
-  //     if (value) {
-  //       geocodeByPlaceId(value.value.place_id)
-  //         .then((results) => {
-  //           setPlaceLocation(results[0].formatted_address);
-  //         })
-  //         .catch((error) => console.error(error));
-  //     }
-  //   }, [value]);
-
-  console.log(placeId);
   if (!identifiedPlace) {
     return (
       <div className="center">
@@ -66,7 +65,9 @@ function EditModal() {
     setPlaceRating(value);
   }
 
-  function handleAddButtonClick() {}
+  function handleDoneButtonClick() {
+    isEdited(true);
+  }
 
   function handleActionButtonClick() {}
 
@@ -84,27 +85,28 @@ function EditModal() {
 
   async function formSubmitHandler(event) {
     event.preventDefault();
-    handleActionButtonClick();
-    const newPlace = {
-      id: "place" + Math.floor(Math.random() * 100),
+    handleDoneButtonClick();
+    console.log(value);
+    const updatedPlace = {
       img: placeImg,
-      title: value.value.structured_formatting.main_text,
+      title:
+        value.value.place_id !== null
+          ? value.value.structured_formatting.main_text
+          : value,
       location: placeLocation,
       category: placeCategory,
       price: placePrice,
       rating: placeRating,
       description: placeDescription,
-      visited: showVisitedList ? true : false,
-      meals: [],
-      drinks: [],
     };
-    if (showVisitedList) {
-      dispatch(placesActions.addPlace(newPlace));
-    }
-
-    console.log("New place created.");
-    console.log(newPlace);
-    setPlaceRating(0);
+    dispatch(
+      placesActions.updatePlace({
+        placeId: placeId,
+        updatedPlace: updatedPlace,
+      })
+    );
+    console.log("Updated place.");
+    console.log(updatedPlace);
   }
 
   return (
@@ -143,7 +145,7 @@ function EditModal() {
                 }),
               },
               placeholder: "Search Places",
-              value,
+              value: { label: value },
               onChange: setValue,
             }}
           />
@@ -182,7 +184,12 @@ function EditModal() {
           value={placeDescription}
         ></textarea>
 
-        {showVisitedList && <StarRating ratingHandler={placeRatingHandler} />}
+        {showVisitedList && (
+          <StarRating
+            value={identifiedPlace.rating}
+            ratingHandler={placeRatingHandler}
+          />
+        )}
         <button
           type="button"
           className="modal-upload-button"
@@ -203,7 +210,11 @@ function EditModal() {
           >
             DELETE
           </button>
-          <button type="submit" className="action-button">
+          <button
+            className={handleDoneButtonClick}
+            type="submit"
+            className="action-button"
+          >
             DONE
           </button>
         </div>

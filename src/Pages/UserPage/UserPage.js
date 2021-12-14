@@ -37,6 +37,7 @@ function UserPage() {
   // TODO: Optimize this. This is being called everytime the use selects a restaurant.
   // Gets the full address of the selected restaurant.
   useEffect(() => {
+    console.log(value);
     if (value) {
       geocodeByPlaceId(value.value.place_id)
         .then((results) => {
@@ -96,7 +97,7 @@ function UserPage() {
     event.preventDefault();
     handleActionButtonClick();
     const newPlace = {
-      id: "place" + Math.floor(Math.random() * 100),
+      id: value.value.place_id,
       img: placeImg,
       title: value.value.structured_formatting.main_text,
       location: placeLocation,
@@ -282,7 +283,7 @@ function UserPage() {
             ></textarea>
 
             {showVisitedList && (
-              <StarRating ratingHandler={placeRatingHandler} />
+              <StarRating value={0} ratingHandler={placeRatingHandler} />
             )}
             <button
               type="button"

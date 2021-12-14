@@ -11,6 +11,20 @@ const placesSlice = createSlice({
       state.placesList.push(action.payload);
     },
 
+    updatePlace(state, action) {
+      const foundPlace = state.placesList.find(
+        (place) => place.id === action.payload.placeId
+      );
+
+      foundPlace.img = action.payload.updatedPlace.img;
+      foundPlace.title = action.payload.updatedPlace.title;
+      foundPlace.category = action.payload.updatedPlace.category;
+      foundPlace.description = action.payload.updatedPlace.description;
+      foundPlace.location = action.payload.updatedPlace.location;
+      foundPlace.price = action.payload.updatedPlace.price;
+      foundPlace.rating = action.payload.updatedPlace.rating;
+    },
+
     addMeal(state, action) {
       const foundPlace = state.placesList.find(
         (place) => place.id === action.payload.placeId
