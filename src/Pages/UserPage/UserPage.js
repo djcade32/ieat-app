@@ -239,14 +239,6 @@ function UserPage() {
                   onChange: setValue,
                 }}
               />
-              {/* <i className="fas fa-search icon"></i>
-              <input
-                onChange={placeTitleHandler}
-                className="input"
-                type="text"
-                placeholder="Search places"
-                value={placeTitle}
-              /> */}
             </div>
 
             <div className="input-wrapper">

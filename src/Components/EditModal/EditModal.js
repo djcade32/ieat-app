@@ -12,35 +12,33 @@ import GooglePlacesAutocomplete, {
   geocodeByPlaceId,
 } from "react-google-places-autocomplete";
 
-function EditModal() {
+function EditModal(props) {
   const dispatch = useDispatch();
 
-  const placesList = useSelector((state) => state.places.placesList);
+  // const placesList = useSelector((state) => state.places.placesList);
 
   const uploadRef = useRef(null);
-  const placeId = useParams().placeId;
-  const identifiedPlace = placesList.find((p) => p.id === placeId);
-  const [showVisitedList, setShowVisitedList] = useState(true);
-  const [placeLocation, setPlaceLocation] = useState("");
-  const [placeCategory, setPlaceCategory] = useState(identifiedPlace.category);
-  const [placePrice, setPlacePrice] = useState(identifiedPlace.price);
-  const [placeRating, setPlaceRating] = useState(identifiedPlace.rating);
+  // const placeId = useParams().placeId;
+  // const identifiedPlace = placesList.find((p) => p.id === placeId);
+  const [placeLocation, setPlaceLocation] = useState(props.place.location);
+  const [placeCategory, setPlaceCategory] = useState(props.place.category);
+  const [placePrice, setPlacePrice] = useState(props.place.price);
+  const [placeRating, setPlaceRating] = useState(props.place.rating);
   const [placeDescription, setPlaceDescription] = useState(
-    identifiedPlace.description
+    props.place.description
   );
-  const [value, setValue] = useState(identifiedPlace.title);
-  const [edited, isEdited] = useState(false);
+  const [placeTitle, setPlaceTitle] = useState(props.place.title);
   useEffect(() => {
-    if (edited) {
-      geocodeByPlaceId(value.value.place_id)
+    if (placeTitle !== props.place.title) {
+      geocodeByPlaceId(placeTitle.value.place_id)
         .then((results) => {
           setPlaceLocation(results[0].formatted_address);
         })
         .catch((error) => console.error(error));
     }
-  }, [edited]);
+  }, [props.place.title, placeTitle, props.place.location]);
 
-  if (!identifiedPlace) {
+  if (!props.place) {
     return (
       <div className="center">
         <h2 style={{ textAlign: "center" }}>Could not find place!</h2>
@@ -61,38 +59,22 @@ function EditModal() {
   }
 
   function placeRatingHandler(value) {
-    console.log("user page: " + value);
     setPlaceRating(value);
   }
-
-  function handleDoneButtonClick() {
-    isEdited(true);
-  }
-
-  function handleActionButtonClick() {}
 
   function handleImageUpload() {
     uploadRef.current.click();
   }
 
-  function handleListButtonClick(event) {
-    if (event.target.id === "visited" || event.target.id === "visited-stat") {
-      setShowVisitedList(true);
-    } else {
-      setShowVisitedList(false);
-    }
-  }
-
   async function formSubmitHandler(event) {
+    props.closeEditModalHandler();
     event.preventDefault();
-    handleDoneButtonClick();
-    console.log(value);
     const updatedPlace = {
       img: placeImg,
       title:
-        value.value.place_id !== null
-          ? value.value.structured_formatting.main_text
-          : value,
+        placeTitle !== props.place.title
+          ? placeTitle.value.structured_formatting.main_text
+          : placeTitle,
       location: placeLocation,
       category: placeCategory,
       price: placePrice,
@@ -101,7 +83,7 @@ function EditModal() {
     };
     dispatch(
       placesActions.updatePlace({
-        placeId: placeId,
+        placeId: props.place.id,
         updatedPlace: updatedPlace,
       })
     );
@@ -144,9 +126,9 @@ function EditModal() {
                   fontFamily: " var(--font-family)",
                 }),
               },
-              placeholder: "Search Places",
-              value: { label: value },
-              onChange: setValue,
+              placeholder: props.place.title,
+              value: placeTitle,
+              onChange: setPlaceTitle,
             }}
           />
         </div>
@@ -184,12 +166,10 @@ function EditModal() {
           value={placeDescription}
         ></textarea>
 
-        {showVisitedList && (
-          <StarRating
-            value={identifiedPlace.rating}
-            ratingHandler={placeRatingHandler}
-          />
-        )}
+        <StarRating
+          value={props.place.rating}
+          ratingHandler={placeRatingHandler}
+        />
         <button
           type="button"
           className="modal-upload-button"
@@ -205,16 +185,12 @@ function EditModal() {
         <div className="buttons-container">
           <button
             type="button"
-            onClick={handleActionButtonClick}
+            onClick={props.closeEditModalHandler}
             className="action-button"
           >
             DELETE
           </button>
-          <button
-            className={handleDoneButtonClick}
-            type="submit"
-            className="action-button"
-          >
+          <button type="submit" className="action-button">
             DONE
           </button>
         </div>

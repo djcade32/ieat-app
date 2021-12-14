@@ -105,7 +105,7 @@ function RestaurantPage(props) {
   }
 
   function editClickHandler() {
-    setShowEditModal(true);
+    setShowEditModal(!showEditModal);
   }
 
   return (
@@ -270,7 +270,12 @@ function RestaurantPage(props) {
           </form>
         </AddModal>
       )}
-      {showEditModal && <EditModal />}
+      {showEditModal && (
+        <EditModal
+          place={identifiedPlace}
+          closeEditModalHandler={editClickHandler}
+        />
+      )}
     </div>
   );
 }
