@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 function RestaurantCard(props) {
   return (
     <li className="place-container">
-      <Link to={`/${props.id}/restaurant`}>
+      <Link to={`/${props.userId}/${props.id}/restaurant`}>
         <img className="place-image" src={props.img} alt={props.title} />
         <div className="place-info-wrapper">
           <h2 className="place-name">{props.title}</h2>

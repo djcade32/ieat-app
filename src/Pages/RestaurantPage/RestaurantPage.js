@@ -10,7 +10,8 @@ import StarRating from "../../Components/StarRating/StarRating";
 import { useSelector, useDispatch } from "react-redux";
 import itemImg from "../../images/meal-6-img-1.jpg";
 import { placesActions } from "../../store/places";
-import EditModal from "../../Components/EditModal/EditModal";
+import EditRestaurantModal from "../../Components/EditModal/EditRestaurantModal";
+import EditItemModal from "../../Components/EditModal/EditItemModal";
 
 function RestaurantPage(props) {
   const dispatch = useDispatch();
@@ -20,18 +21,21 @@ function RestaurantPage(props) {
   const [showModal, setShowModal] = useState(false);
   const [showMealList, setShowMealList] = useState(true);
 
+  const [itemToEdit, setItemToEdit] = useState(null);
   const [itemTitle, setItemTitle] = useState("");
   const [itemPrice, setItemPrice] = useState("");
   const [itemRating, setItemRating] = useState("");
   const [itemDescription, setItemDescription] = useState("");
   const [foodType, setFoodType] = useState("meal");
-  const [showEditModal, setShowEditModal] = useState(false);
+  const [showRestaurantEditModal, setShowRestaurantEditModal] = useState(false);
+  const [showItemEditModal, setShowItemEditModal] = useState(false);
 
   const uploadRef = useRef(null);
 
   const placeId = useParams().placeId;
 
   const identifiedPlace = placesList.find((p) => p.id === placeId);
+  console.log(identifiedPlace);
   if (!identifiedPlace) {
     return (
       <div className="center">
@@ -53,7 +57,6 @@ function RestaurantPage(props) {
   }
 
   function itemRatingHandler(value) {
-    console.log("user page: " + value);
     setItemRating(value);
   }
 
@@ -92,6 +95,7 @@ function RestaurantPage(props) {
       description: itemDescription,
       price: itemPrice,
       rating: itemRating,
+      foodType: foodType,
     };
     if (foodType === "meal") {
       dispatch(placesActions.addMeal({ placeId: placeId, item: newItem }));
@@ -104,8 +108,17 @@ function RestaurantPage(props) {
     setItemRating(0);
   }
 
-  function editClickHandler() {
-    setShowEditModal(!showEditModal);
+  function restaurantEditClickHandler() {
+    setShowRestaurantEditModal(!showRestaurantEditModal);
+  }
+
+  function itemEditClickHandler() {
+    setShowItemEditModal(!showItemEditModal);
+  }
+
+  function itemEditHandler(item) {
+    setShowItemEditModal(true);
+    setItemToEdit(item);
   }
 
   return (
@@ -120,7 +133,7 @@ function RestaurantPage(props) {
           <div className="restaurant-info-wrapper-top">
             <h2 className="restaurant-name">{identifiedPlace.title}</h2>
             <i
-              onClick={editClickHandler}
+              onClick={restaurantEditClickHandler}
               className="fas fa-pen restaurant-page-edit-icon"
             ></i>
           </div>
@@ -182,6 +195,7 @@ function RestaurantPage(props) {
                     currency: "USD",
                   }).format(meal.price)}
                   rating={meal.rating}
+                  editHandler={itemEditHandler}
                 />
               );
             })
@@ -193,8 +207,12 @@ function RestaurantPage(props) {
                   title={drink.title}
                   img={drink.img}
                   description={drink.description}
-                  price={drink.price}
+                  price={new Intl.NumberFormat("en-US", {
+                    style: "currency",
+                    currency: "USD",
+                  }).format(drink.price)}
                   rating={drink.rating}
+                  editHandler={itemEditHandler}
                 />
               );
             })}
@@ -270,10 +288,16 @@ function RestaurantPage(props) {
           </form>
         </AddModal>
       )}
-      {showEditModal && (
-        <EditModal
+      {showRestaurantEditModal && (
+        <EditRestaurantModal
           place={identifiedPlace}
-          closeEditModalHandler={editClickHandler}
+          closeEditModalHandler={restaurantEditClickHandler}
+        />
+      )}
+      {showItemEditModal && (
+        <EditItemModal
+          item={itemToEdit}
+          closeEditModalHandler={itemEditClickHandler}
         />
       )}
     </div>

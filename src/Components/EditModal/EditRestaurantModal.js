@@ -1,21 +1,21 @@
 import React, { useState, useRef, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { placesActions } from "../../store/places";
 import { useParams } from "react-router-dom";
 
-import StarRating from "../../Components/StarRating/StarRating";
+import StarRating from "../StarRating/StarRating";
 import placeImg from "../../images/place-img-6.jpg";
 
-import "./EditModal.css";
 import AddModal from "../AddModal/AddModal";
 import GooglePlacesAutocomplete, {
   geocodeByPlaceId,
 } from "react-google-places-autocomplete";
+import { useNavigate } from "react-router-dom";
 
 function EditModal(props) {
   const dispatch = useDispatch();
-
-  // const placesList = useSelector((state) => state.places.placesList);
+  let navigate = useNavigate();
+  const userId = useParams().userId;
 
   const uploadRef = useRef(null);
   // const placeId = useParams().placeId;
@@ -60,6 +60,12 @@ function EditModal(props) {
 
   function placeRatingHandler(value) {
     setPlaceRating(value);
+  }
+
+  function deleteHandler() {
+    dispatch(placesActions.deletePlace(props.place.id));
+    const route = "/" + userId;
+    navigate(route, { replace: true });
   }
 
   function handleImageUpload() {
@@ -185,10 +191,17 @@ function EditModal(props) {
         <div className="buttons-container">
           <button
             type="button"
-            onClick={props.closeEditModalHandler}
+            onClick={deleteHandler}
             className="action-button"
           >
             DELETE
+          </button>
+          <button
+            type="button"
+            onClick={props.closeEditModalHandler}
+            className="action-button"
+          >
+            CANCEL
           </button>
           <button type="submit" className="action-button">
             DONE

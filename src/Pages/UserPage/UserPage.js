@@ -34,10 +34,7 @@ function UserPage() {
   const [placeDescription, setPlaceDescription] = useState("");
   const [value, setValue] = useState(null);
 
-  // TODO: Optimize this. This is being called everytime the use selects a restaurant.
-  // Gets the full address of the selected restaurant.
   useEffect(() => {
-    console.log(value);
     if (value) {
       geocodeByPlaceId(value.value.place_id)
         .then((results) => {
@@ -167,6 +164,7 @@ function UserPage() {
                   <RestaurantCardVisited
                     key={place.id}
                     id={place.id}
+                    userId={userId}
                     title={place.title}
                     img={place.img}
                     location={place.location}

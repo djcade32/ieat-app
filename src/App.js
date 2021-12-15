@@ -15,7 +15,10 @@ function App() {
         <Routes>
           <Route path="/*" element={<Auth />} />
           <Route path="/:userId/*" element={<UserPage />} />
-          <Route path="/:placeId/restaurant/*" element={<RestaurantPage />} />
+          <Route
+            path="/:userId/:placeId/restaurant/*"
+            element={<RestaurantPage />}
+          />
         </Routes>
       </div>
     </Router>

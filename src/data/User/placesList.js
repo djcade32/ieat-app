@@ -36,6 +36,7 @@ export const PLACES_LIST = [
           "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptas, earum.",
         price: "11.50",
         rating: 5,
+        foodType: "meal",
       },
       {
         id: "placeImg3Meal2",
@@ -45,6 +46,7 @@ export const PLACES_LIST = [
           "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptas, earum.",
         price: "12.99",
         rating: 4,
+        foodType: "meal",
       },
     ],
     drinks: [
@@ -56,6 +58,7 @@ export const PLACES_LIST = [
           "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptas, earum.",
         price: "5.00",
         rating: 3,
+        foodType: "drink",
       },
       {
         id: "placeImg3Drink2",
@@ -63,8 +66,9 @@ export const PLACES_LIST = [
         title: "Hot Chocolate",
         description:
           "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptas, earum.",
-        price: "$3.99",
+        price: "3.99",
         rating: 4,
+        foodType: "drink",
       },
     ],
   },
@@ -88,6 +92,7 @@ export const PLACES_LIST = [
           "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptas, earum.",
         price: "7.50",
         rating: 4,
+        foodType: "meal",
       },
       {
         id: "placeImg2Meal2",
@@ -97,6 +102,7 @@ export const PLACES_LIST = [
           "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptas, earum.",
         price: "11.99",
         rating: 4,
+        foodType: "meal",
       },
     ],
     drinks: [],
@@ -121,6 +127,7 @@ export const PLACES_LIST = [
           "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptas, earum.",
         price: "3.50",
         rating: 5,
+        foodType: "meal",
       },
     ],
     drinks: [
@@ -132,6 +139,7 @@ export const PLACES_LIST = [
           "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptas, earum.",
         price: "4.00",
         rating: 3,
+        foodType: "drink",
       },
     ],
   },
