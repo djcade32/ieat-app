@@ -1,5 +1,5 @@
-import React, { useState, useRef, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import React, { useState, useRef } from "react";
+import { useDispatch } from "react-redux";
 import { placesActions } from "../../store/places";
 import { useParams } from "react-router-dom";
 
@@ -20,18 +20,7 @@ function EditModal(props) {
   );
   const [foodType, setFoodType] = useState(props.item.foodType);
 
-  // const placesList = useSelector((state) => state.places.placesList);
-
   const uploadRef = useRef(null);
-  // useEffect(() => {
-  //   if (placeTitle !== props.place.title) {
-  //     geocodeByPlaceId(placeTitle.value.place_id)
-  //       .then((results) => {
-  //         setPlaceLocation(results[0].formatted_address);
-  //       })
-  //       .catch((error) => console.error(error));
-  //   }
-  // }, [props.place.title, placeTitle, props.place.location]);
 
   function itemFoodTypeHandler(event) {
     setFoodType(event.target.value);
@@ -61,6 +50,17 @@ function EditModal(props) {
     props.closeEditModalHandler();
   }
 
+  function deleteHandler() {
+    dispatch(
+      placesActions.deleteItem({
+        placeId: placeId,
+        itemId: props.item.id,
+        itemFoodType: props.item.foodType,
+      })
+    );
+    props.closeEditModalHandler();
+  }
+
   async function formSubmitHandler(event) {
     props.closeEditModalHandler();
     event.preventDefault();
@@ -80,7 +80,6 @@ function EditModal(props) {
           placeId: placeId,
           itemId: props.item.id,
           itemFoodType: props.item.foodType,
-          updatedItem: updatedItem,
         })
       );
       if (foodType === "meal") {
@@ -159,6 +158,13 @@ function EditModal(props) {
           />
         </button>
         <div className="buttons-container">
+          <button
+            type="button"
+            onClick={deleteHandler}
+            className="action-button"
+          >
+            DELETE
+          </button>
           <button
             type="button"
             onClick={handleCancelButtonClick}
