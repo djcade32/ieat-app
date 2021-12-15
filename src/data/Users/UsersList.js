@@ -7,6 +7,6 @@ export const USERS_LIST = [
     profilePic: profilePic,
     location: "Washington, D.C.",
     email: "test@test.com",
-    password: "12345",
+    password: "123456",
   },
 ];

@@ -71,3 +71,8 @@
   cursor: pointer;
   outline: var(--font-color) solid 1px;
 }
+
+.login-page-error {
+  color: red;
+  margin-bottom: 1rem;
+}

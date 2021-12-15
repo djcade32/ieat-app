@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 function LoginPage(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isValid, setIsValid] = useState(true);
   let navigate = useNavigate();
 
   function emailInputHandler(event) {
@@ -23,9 +24,11 @@ function LoginPage(props) {
   function formSubmitHandler(event) {
     event.preventDefault();
     const identifiedUser = USERS_LIST.find((u) => u.email === email);
-    if (!identifiedUser) {
-      return console.log("incorrect credentials");
-    } else if (identifiedUser.password === password) {
+    if (!identifiedUser || identifiedUser.password !== password) {
+      setIsValid(false);
+      return;
+    } else {
+      setIsValid(true);
       let route = `/${identifiedUser.id}`;
       console.log("Succesfully logged in");
       navigate(route, { replace: true });
@@ -53,6 +56,11 @@ function LoginPage(props) {
             autoComplete="off"
           />
         </div>
+        {!isValid && (
+          <p className="login-page-error">
+            Credentials are incorrect. Try again.
+          </p>
+        )}
         <div className="login-page-action-buttons">
           <button
             type="submit"
